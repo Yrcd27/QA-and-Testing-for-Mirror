@@ -1,0 +1,23 @@
+{
+  "name": "mirror-unit-tests",
+  "version": "1.0.0",
+  "description": "Automated unit tests for Mirror application authentication",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./run-tests.js",
+    "test:direct": "node ./node_modules/jest/bin/jest.js --runInBand",
+    "test:auth": "node ./node_modules/jest/bin/jest.js auth/ --runInBand"
+  },
+  "keywords": [
+    "testing",
+    "jest",
+    "supertest",
+    "authentication"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  }
+}
