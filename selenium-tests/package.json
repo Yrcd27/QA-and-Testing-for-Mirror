@@ -1,0 +1,52 @@
+{
+  "name": "mirror-selenium-tests",
+  "version": "1.0.0",
+  "description": "Selenium UI tests for Mirror MERN application",
+  "type": "module",
+  "scripts": {
+    "test": "mocha tests/**/*.test.js --timeout 30000",
+    "test:login": "mocha tests/login.test.js --timeout 30000",
+    "test:journal": "mocha tests/journal.test.js --timeout 30000",
+    "test:professional": "mocha tests/professional-*.test.js --timeout 120000",
+    "test:professional:login": "mocha tests/professional-login.test.js --timeout 120000",
+    "test:professional:journal": "mocha tests/professional-journal.test.js --timeout 120000",
+    "test:professional:e2e": "mocha tests/professional-e2e.test.js --timeout 120000",
+    "test:professional:single": "mocha tests/professional-login.test.js --timeout 120000 --grep \"should successfully authenticate with valid credentials\"",
+    "test:all": "npm run test:professional",
+    "setup": "node setup/downloadDriver.js",
+    "setup:user": "node setup/setupTestUser.js",
+    "diagnose": "node setup/diagnoseWebDriver.js",
+    "quicktest": "node setup/quickTest.js",
+    "quicktest:chromium": "node setup/quickChromiumTest.js",
+    "test:setup": "node setup/testProfessionalSetup.js",
+    "test:setup:chromium": "node setup/testChromiumProfessionalSetup.js",
+    "debug": "node debug-test.js",
+    "debug:long": "node debug-test.js",
+    "demo": "node interactive-demo.js",
+    "app:test": "node app-test-with-pause.js",
+    "login-journal-demo": "node login-journal-demo.js",
+    "start:backend": "cd ../mirror-backend && npm start",
+    "start:frontend": "cd ../mirror-frontend && npm run dev"
+  },
+  "dependencies": {
+    "axios": "^1.12.2",
+    "chai": "^4.3.10",
+    "chromedriver": "^140.0.3",
+    "mocha": "^10.2.0",
+    "selenium-webdriver": "^4.15.0",
+    "webdriver-manager": "^12.1.9"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.9",
+    "@types/mocha": "^10.0.4"
+  },
+  "keywords": [
+    "selenium",
+    "testing",
+    "ui",
+    "automation",
+    "mern"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
