@@ -1,0 +1,14 @@
+{
+  "name": "mirror-api-tests",
+  "version": "1.0.0",
+  "description": "Postman API tests for Mirror Journal Application",
+  "scripts": {
+    "setup": "node setup-test-user.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "mongoose": "^7.6.3",
+    "node-fetch": "^3.3.2"
+  }
+}
