@@ -59,12 +59,16 @@ jobs:
 
     # Start services for tests
     - name: Start backend server
-      if: inputs.test_type == 'all' || inputs.test_type == 'selenium'
+      if: inputs.test_type == 'all' || inputs.test_type == 'selenium' || inputs.test_type == 'unit'
       working-directory: ./mirror-backend
       run: |
         nohup node server.js &
         echo $! > backend.pid
-        sleep 5
+        sleep 10  # Give the server more time to start
+      env:
+        MONGO_URI: mongodb://localhost:27017/mirror
+        JWT_SECRET: test-jwt-secret
+        PORT: 3000
 
     - name: Start frontend server
       if: inputs.test_type == 'all' || inputs.test_type == 'selenium'
@@ -73,7 +77,7 @@ jobs:
         nohup npm run dev &
         echo $! > frontend.pid
         sleep 10
-
+        
     # Run tests
     - name: Run unit tests
       if: inputs.test_type == 'all' || inputs.test_type == 'unit'

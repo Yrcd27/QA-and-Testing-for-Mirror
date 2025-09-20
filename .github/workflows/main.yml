@@ -66,6 +66,18 @@ jobs:
     #   working-directory: ./mirror-frontend
     #   run: npm run lint
     
+    # Start Backend server for all tests
+    - name: Start backend server
+      working-directory: ./mirror-backend
+      run: |
+        nohup node server.js &
+        echo $! > backend.pid
+        sleep 10  # Give the server more time to start up
+      env:
+        MONGO_URI: mongodb://localhost:27017/mirror
+        JWT_SECRET: test-jwt-secret
+        PORT: 3000
+        
     # Unit tests steps
     - name: Install unit tests dependencies
       working-directory: ./unit-tests
@@ -89,19 +101,6 @@ jobs:
       uses: browser-actions/setup-chrome@v1
       with:
         chrome-version: stable
-      continue-on-error: true
-    
-    # Start Backend server for Selenium tests
-    - name: Start backend server
-      working-directory: ./mirror-backend
-      run: |
-        nohup node server.js &
-        echo $! > backend.pid
-        sleep 5
-      env:
-        MONGO_URI: mongodb://localhost:27017/mirror
-        JWT_SECRET: test-jwt-secret
-        PORT: 3000
       continue-on-error: true
     
     # Start Frontend server for Selenium tests
