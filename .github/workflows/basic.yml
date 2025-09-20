@@ -1,0 +1,42 @@
+name: Mirror App Basic CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          
+      - name: List directories
+        run: ls -la
+        
+      - name: Check Node.js version
+        run: node --version
+        
+      - name: Check NPM version
+        run: npm --version
+        
+      - name: List backend files
+        run: ls -la mirror-backend/
+        
+      - name: List frontend files
+        run: ls -la mirror-frontend/
+        
+      - name: Install backend dependencies
+        run: cd mirror-backend && npm install
+        continue-on-error: true
+        
+      - name: Install frontend dependencies
+        run: cd mirror-frontend && npm install
+        continue-on-error: true
