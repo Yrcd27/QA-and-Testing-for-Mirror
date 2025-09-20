@@ -1,0 +1,13 @@
+﻿2025-09-20T17:57:23.9966641Z ##[group]Run nohup node server.js &
+2025-09-20T17:57:23.9966976Z [36;1mnohup node server.js &[0m
+2025-09-20T17:57:23.9967221Z [36;1mecho $! > backend.pid[0m
+2025-09-20T17:57:23.9967500Z [36;1msleep 10  # Give the server more time to start up[0m
+2025-09-20T17:57:23.9997600Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:23.9997850Z env:
+2025-09-20T17:57:23.9998075Z   MONGO_URI: mongodb://localhost:27017/mirror
+2025-09-20T17:57:23.9998372Z   JWT_SECRET: test-jwt-secret
+2025-09-20T17:57:23.9998597Z   PORT: 3000
+2025-09-20T17:57:23.9998768Z ##[endgroup]
+2025-09-20T17:57:24.3246779Z [dotenv@17.2.1] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+2025-09-20T17:57:24.4199616Z MongoDB connected
+2025-09-20T17:57:24.4228108Z Server running on port 3000

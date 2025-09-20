@@ -1,0 +1,18 @@
+﻿2025-09-20T17:58:10.0074521Z ##[group]Run # Fix permission issues with the mocha binary
+2025-09-20T17:58:10.0075202Z [36;1m# Fix permission issues with the mocha binary[0m
+2025-09-20T17:58:10.0075722Z [36;1mchmod +x ./node_modules/.bin/mocha[0m
+2025-09-20T17:58:10.0076151Z [36;1mnpm run test:login[0m
+2025-09-20T17:58:10.0119815Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:58:10.0120194Z env:
+2025-09-20T17:58:10.0120495Z   SELENIUM_REMOTE_URL: 
+2025-09-20T17:58:10.0120806Z   SELENIUM_BROWSER: chrome
+2025-09-20T17:58:10.0121169Z   SELENIUM_HEADLESS: true
+2025-09-20T17:58:10.0121779Z   BASE_URL: http://localhost:5173
+2025-09-20T17:58:10.0122208Z   API_URL: http://localhost:3000
+2025-09-20T17:58:10.0122585Z ##[endgroup]
+2025-09-20T17:58:10.1463288Z 
+2025-09-20T17:58:10.1463875Z > mirror-selenium-tests@1.0.0 test:login
+2025-09-20T17:58:10.1464400Z > mocha tests/login.test.js --timeout 30000
+2025-09-20T17:58:10.1464932Z 
+2025-09-20T17:58:10.3132393Z [31mError: No test files found: "tests/login.test.js"[39m
+2025-09-20T17:58:10.3349248Z ##[error]Process completed with exit code 1.

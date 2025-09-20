@@ -1,0 +1,82 @@
+﻿2025-09-20T17:56:48.5846655Z ##[group]Checking docker version
+2025-09-20T17:56:48.5861037Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2025-09-20T17:56:48.6992435Z '1.48'
+2025-09-20T17:56:48.7006961Z Docker daemon API version: '1.48'
+2025-09-20T17:56:48.7008430Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2025-09-20T17:56:48.7203377Z '1.48'
+2025-09-20T17:56:48.7219685Z Docker client API version: '1.48'
+2025-09-20T17:56:48.7226779Z ##[endgroup]
+2025-09-20T17:56:48.7230835Z ##[group]Clean up resources from previous jobs
+2025-09-20T17:56:48.7237430Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=8c523e"
+2025-09-20T17:56:48.7400724Z ##[command]/usr/bin/docker network prune --force --filter "label=8c523e"
+2025-09-20T17:56:48.7563854Z ##[endgroup]
+2025-09-20T17:56:48.7564870Z ##[group]Create local container network
+2025-09-20T17:56:48.7576665Z ##[command]/usr/bin/docker network create --label 8c523e github_network_a11c0c3be1974e5ea45419bcc9f68b43
+2025-09-20T17:56:48.8101732Z 2b70ef54465f2858273131a4dc4037b167b9a21391b4577ac05d5519d4f2783a
+2025-09-20T17:56:48.8123220Z ##[endgroup]
+2025-09-20T17:56:48.8149603Z ##[group]Starting mongodb service container
+2025-09-20T17:56:48.8170288Z ##[command]/usr/bin/docker pull mongo:4.4
+2025-09-20T17:56:49.2891955Z 4.4: Pulling from library/mongo
+2025-09-20T17:56:49.4060152Z d4c3c94e5e10: Pulling fs layer
+2025-09-20T17:56:49.4068113Z bca5893fe8bd: Pulling fs layer
+2025-09-20T17:56:49.4069073Z 35ec036951f8: Pulling fs layer
+2025-09-20T17:56:49.4069564Z ddb77a597b02: Pulling fs layer
+2025-09-20T17:56:49.4069956Z 7ab9eb5a4d9d: Pulling fs layer
+2025-09-20T17:56:49.4070346Z a6c1ba219414: Pulling fs layer
+2025-09-20T17:56:49.4070865Z 83b651df5384: Pulling fs layer
+2025-09-20T17:56:49.4071701Z e233f2d1b360: Pulling fs layer
+2025-09-20T17:56:49.4072232Z 7ab9eb5a4d9d: Waiting
+2025-09-20T17:56:49.4072661Z a6c1ba219414: Waiting
+2025-09-20T17:56:49.4073143Z 83b651df5384: Waiting
+2025-09-20T17:56:49.4073552Z e233f2d1b360: Waiting
+2025-09-20T17:56:49.4074075Z ddb77a597b02: Waiting
+2025-09-20T17:56:49.5417377Z bca5893fe8bd: Verifying Checksum
+2025-09-20T17:56:49.5418134Z bca5893fe8bd: Download complete
+2025-09-20T17:56:49.5506048Z 35ec036951f8: Verifying Checksum
+2025-09-20T17:56:49.5506845Z 35ec036951f8: Download complete
+2025-09-20T17:56:49.6758272Z 7ab9eb5a4d9d: Download complete
+2025-09-20T17:56:49.6819741Z ddb77a597b02: Verifying Checksum
+2025-09-20T17:56:49.6820555Z ddb77a597b02: Download complete
+2025-09-20T17:56:49.7961658Z a6c1ba219414: Verifying Checksum
+2025-09-20T17:56:49.7963365Z a6c1ba219414: Download complete
+2025-09-20T17:56:49.8744146Z d4c3c94e5e10: Verifying Checksum
+2025-09-20T17:56:49.8744750Z d4c3c94e5e10: Download complete
+2025-09-20T17:56:49.9209139Z e233f2d1b360: Verifying Checksum
+2025-09-20T17:56:49.9209850Z e233f2d1b360: Download complete
+2025-09-20T17:56:50.9488916Z d4c3c94e5e10: Pull complete
+2025-09-20T17:56:51.0107680Z 83b651df5384: Verifying Checksum
+2025-09-20T17:56:51.0108321Z 83b651df5384: Download complete
+2025-09-20T17:56:52.0021211Z bca5893fe8bd: Pull complete
+2025-09-20T17:56:52.1620931Z 35ec036951f8: Pull complete
+2025-09-20T17:56:52.2075075Z ddb77a597b02: Pull complete
+2025-09-20T17:56:52.2212363Z 7ab9eb5a4d9d: Pull complete
+2025-09-20T17:56:52.2338928Z a6c1ba219414: Pull complete
+2025-09-20T17:56:54.6502967Z 83b651df5384: Pull complete
+2025-09-20T17:56:54.6706481Z e233f2d1b360: Pull complete
+2025-09-20T17:56:54.6769573Z Digest: sha256:52c42cbab240b3c5b1748582cc13ef46d521ddacae002bbbda645cebed270ec0
+2025-09-20T17:56:54.6787365Z Status: Downloaded newer image for mongo:4.4
+2025-09-20T17:56:54.6800850Z docker.io/library/mongo:4.4
+2025-09-20T17:56:54.6838934Z ##[command]/usr/bin/docker create --name ecf87f42281f49159ff7a1368afcf860_mongo44_23dae1 --label 8c523e --network github_network_a11c0c3be1974e5ea45419bcc9f68b43 --network-alias mongodb -p 27017:27017 --health-cmd "mongo --eval 'db.runCommand({ ping: 1 })'" --health-interval 10s --health-timeout 5s --health-retries 5 -e GITHUB_ACTIONS=true -e CI=true mongo:4.4
+2025-09-20T17:56:54.7154321Z b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:56:54.7181756Z ##[command]/usr/bin/docker start b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:56:55.0612959Z b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:56:55.0636134Z ##[command]/usr/bin/docker ps --all --filter id=b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2025-09-20T17:56:55.0797523Z b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d Up Less than a second (health: starting)
+2025-09-20T17:56:55.0834912Z ##[command]/usr/bin/docker port b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:56:55.0976676Z 27017/tcp -> 0.0.0.0:27017
+2025-09-20T17:56:55.0977244Z 27017/tcp -> [::]:27017
+2025-09-20T17:56:55.1042917Z ##[endgroup]
+2025-09-20T17:56:55.1054109Z ##[group]Waiting for all services to be ready
+2025-09-20T17:56:55.1071058Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:56:55.1211912Z starting
+2025-09-20T17:56:55.1239180Z mongodb service is starting, waiting 2 seconds before checking again.
+2025-09-20T17:56:57.1229731Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:56:57.1359336Z starting
+2025-09-20T17:56:57.1375588Z mongodb service is starting, waiting 4 seconds before checking again.
+2025-09-20T17:57:01.4627618Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:57:01.4756655Z starting
+2025-09-20T17:57:01.4772294Z mongodb service is starting, waiting 7 seconds before checking again.
+2025-09-20T17:57:08.6495281Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:57:08.6629034Z healthy
+2025-09-20T17:57:08.6650057Z mongodb service is healthy.
+2025-09-20T17:57:08.6651029Z ##[endgroup]

@@ -1,0 +1,143 @@
+﻿2025-09-20T17:57:47.0357002Z ##[group]Run npm test
+2025-09-20T17:57:47.0357379Z [36;1mnpm test[0m
+2025-09-20T17:57:47.0388310Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:47.0388554Z env:
+2025-09-20T17:57:47.0388760Z   API_BASE_URL: http://localhost:3000
+2025-09-20T17:57:47.0388997Z ##[endgroup]
+2025-09-20T17:57:47.2023907Z 
+2025-09-20T17:57:47.2024788Z > mirror-unit-tests@1.0.0 test
+2025-09-20T17:57:47.2026813Z > node ./run-tests.js
+2025-09-20T17:57:47.2027782Z 
+2025-09-20T17:57:47.2351304Z 
+2025-09-20T17:57:47.2352163Z === Running Registration Tests First ===
+2025-09-20T17:57:47.2352478Z 
+2025-09-20T17:57:48.1020410Z   console.log
+2025-09-20T17:57:48.1021112Z     Using test user for registration: {
+2025-09-20T17:57:48.1023225Z       Name: 'TestUser_1758391068076',
+2025-09-20T17:57:48.1023939Z       email: 'testuser_1758391068076@example.com',
+2025-09-20T17:57:48.1024573Z       passwordLength: 17
+2025-09-20T17:57:48.1025334Z     }
+2025-09-20T17:57:48.1026032Z 
+2025-09-20T17:57:48.1026590Z       at Object.log (auth/registration.test.js:8:13)
+2025-09-20T17:57:48.1026950Z 
+2025-09-20T17:57:48.1048813Z   console.log
+2025-09-20T17:57:48.1050201Z     Making registration request to: { baseUrl: 'http://localhost:3000', path: '/api/auth/signup' }
+2025-09-20T17:57:48.1050801Z 
+2025-09-20T17:57:48.1051346Z       at Object.log (auth/registration.test.js:19:13)
+2025-09-20T17:57:48.1051799Z 
+2025-09-20T17:57:48.2418088Z   console.log
+2025-09-20T17:57:48.2418896Z     Registration response status: 201
+2025-09-20T17:57:48.2419455Z 
+2025-09-20T17:57:48.2419918Z       at Object.log (auth/registration.test.js:27:13)
+2025-09-20T17:57:48.2420155Z 
+2025-09-20T17:57:48.2426699Z   console.log
+2025-09-20T17:57:48.2427585Z     Registration response body: { message: 'User registered successfully' }
+2025-09-20T17:57:48.2428057Z 
+2025-09-20T17:57:48.2428496Z       at Object.log (auth/registration.test.js:28:13)
+2025-09-20T17:57:48.2428724Z 
+2025-09-20T17:57:48.2601853Z PASS auth/registration.test.js
+2025-09-20T17:57:48.2603532Z   User Registration Tests
+2025-09-20T17:57:48.2607070Z     ✓ Should register a new user successfully (142 ms)
+2025-09-20T17:57:48.2607791Z     ✓ Should fail registration when fields are missing (4 ms)
+2025-09-20T17:57:48.2608526Z     ✓ Should fail registration with short password (3 ms)
+2025-09-20T17:57:48.2609242Z     ✓ Should fail registration with existing email (6 ms)
+2025-09-20T17:57:48.2609967Z 
+2025-09-20T17:57:48.2629592Z Test Suites: 1 passed, 1 total
+2025-09-20T17:57:48.2630140Z Tests:       4 passed, 4 total
+2025-09-20T17:57:48.2630647Z Snapshots:   0 total
+2025-09-20T17:57:48.2631328Z Time:        0.659 s
+2025-09-20T17:57:48.2632478Z Ran all test suites matching /auth\/registration.test.js/i.
+2025-09-20T17:57:48.3731986Z 
+2025-09-20T17:57:48.3732638Z === Running Login Tests Second ===
+2025-09-20T17:57:48.3732971Z 
+2025-09-20T17:57:49.1888123Z   console.log
+2025-09-20T17:57:49.1888855Z     Using test user for login: {
+2025-09-20T17:57:49.1889409Z       Name: 'TestUser_1758391069170',
+2025-09-20T17:57:49.1890013Z       email: 'testuser_1758391069170@example.com',
+2025-09-20T17:57:49.1890656Z       passwordLength: 17
+2025-09-20T17:57:49.1891108Z     }
+2025-09-20T17:57:49.1891363Z 
+2025-09-20T17:57:49.1891949Z       at Object.log (auth/login.test.js:8:13)
+2025-09-20T17:57:49.1892281Z 
+2025-09-20T17:57:49.1902862Z   console.log
+2025-09-20T17:57:49.1903454Z     Registering user before login tests...
+2025-09-20T17:57:49.1903884Z 
+2025-09-20T17:57:49.1904193Z       at Object.log (auth/login.test.js:15:13)
+2025-09-20T17:57:49.1904513Z 
+2025-09-20T17:57:49.1916659Z   console.log
+2025-09-20T17:57:49.1917613Z     Making pre-registration request to: { baseUrl: 'http://localhost:3000', path: '/api/auth/signup' }
+2025-09-20T17:57:49.1918382Z 
+2025-09-20T17:57:49.1918675Z       at Object.log (auth/login.test.js:24:15)
+2025-09-20T17:57:49.1919016Z 
+2025-09-20T17:57:49.2959412Z   console.log
+2025-09-20T17:57:49.2959965Z     Pre-registration status: 201
+2025-09-20T17:57:49.2960267Z 
+2025-09-20T17:57:49.2960516Z       at Object.log (auth/login.test.js:31:15)
+2025-09-20T17:57:49.2961647Z 
+2025-09-20T17:57:49.2967401Z   console.log
+2025-09-20T17:57:49.2968040Z     Pre-registration response: { message: 'User registered successfully' }
+2025-09-20T17:57:49.2968524Z 
+2025-09-20T17:57:49.2968758Z       at Object.log (auth/login.test.js:32:15)
+2025-09-20T17:57:49.2969077Z 
+2025-09-20T17:57:49.2988310Z   console.log
+2025-09-20T17:57:49.2988906Z     Attempting login with: { email: 'testuser_1758391069170@example.com' }
+2025-09-20T17:57:49.2989365Z 
+2025-09-20T17:57:49.2989606Z       at Object.log (auth/login.test.js:47:13)
+2025-09-20T17:57:49.2989942Z 
+2025-09-20T17:57:49.2998906Z   console.log
+2025-09-20T17:57:49.2999612Z     Making login request to: { baseUrl: 'http://localhost:3000', path: '/api/auth/login' }
+2025-09-20T17:57:49.3000128Z 
+2025-09-20T17:57:49.3000367Z       at Object.log (auth/login.test.js:51:13)
+2025-09-20T17:57:49.3000681Z 
+2025-09-20T17:57:49.3932526Z   console.log
+2025-09-20T17:57:49.3933095Z     Login response status: 200
+2025-09-20T17:57:49.3933461Z 
+2025-09-20T17:57:49.3933712Z       at Object.log (auth/login.test.js:59:13)
+2025-09-20T17:57:49.3934050Z 
+2025-09-20T17:57:49.3940440Z   console.log
+2025-09-20T17:57:49.3940831Z     Login response body: {
+2025-09-20T17:57:49.3941310Z       message: 'Login successful',
+2025-09-20T17:57:49.3945049Z       token: '***',
+2025-09-20T17:57:49.3945467Z       user: {
+2025-09-20T17:57:49.3945837Z         id: '68ceeb1d706eb0133a5d4785',
+2025-09-20T17:57:49.3946331Z         name: 'TestUser_1758391069170',
+2025-09-20T17:57:49.3946848Z         email: 'testuser_1758391069170@example.com'
+2025-09-20T17:57:49.3947275Z       }
+2025-09-20T17:57:49.3947539Z     }
+2025-09-20T17:57:49.3947690Z 
+2025-09-20T17:57:49.3947928Z       at Object.log (auth/login.test.js:60:13)
+2025-09-20T17:57:49.3948245Z 
+2025-09-20T17:57:49.6023004Z   console.log
+2025-09-20T17:57:49.6023993Z     Second user registration response: { message: 'User registered successfully' }
+2025-09-20T17:57:49.6024732Z 
+2025-09-20T17:57:49.6025039Z       at Object.log (auth/login.test.js:143:13)
+2025-09-20T17:57:49.6025480Z 
+2025-09-20T17:57:49.6942442Z   console.log
+2025-09-20T17:57:49.6942920Z     Second user login response: {
+2025-09-20T17:57:49.6943319Z       message: 'Login successful',
+2025-09-20T17:57:49.6945169Z       token: '***',
+2025-09-20T17:57:49.6945459Z       user: {
+2025-09-20T17:57:49.6946237Z         id: '68ceeb1d706eb0133a5d478b',
+2025-09-20T17:57:49.6946642Z         name: 'AnotherUser_1758391069170',
+2025-09-20T17:57:49.6947116Z         email: 'anotheruser_1758391069170@example.com'
+2025-09-20T17:57:49.6947413Z       }
+2025-09-20T17:57:49.6947576Z     }
+2025-09-20T17:57:49.6947679Z 
+2025-09-20T17:57:49.6947822Z       at Object.log (auth/login.test.js:159:13)
+2025-09-20T17:57:49.6948030Z 
+2025-09-20T17:57:49.6987220Z PASS auth/login.test.js
+2025-09-20T17:57:49.6989943Z   User Login Tests
+2025-09-20T17:57:49.6993405Z     ✓ Should login successfully with valid credentials (100 ms)
+2025-09-20T17:57:49.6994363Z     ✓ Should fail login when fields are missing (11 ms)
+2025-09-20T17:57:49.6995405Z     ✓ Should fail login with non-existent email (10 ms)
+2025-09-20T17:57:49.6996302Z     ✓ Should fail login with incorrect password (90 ms)
+2025-09-20T17:57:49.6997135Z     ✓ Should register and login another user successfully (186 ms)
+2025-09-20T17:57:49.7001957Z 
+2025-09-20T17:57:49.7023626Z Test Suites: 1 passed, 1 total
+2025-09-20T17:57:49.7024272Z Tests:       5 passed, 5 total
+2025-09-20T17:57:49.7024772Z Snapshots:   0 total
+2025-09-20T17:57:49.7025394Z Time:        0.992 s
+2025-09-20T17:57:49.7026064Z Ran all test suites matching /auth\/login.test.js/i.
+2025-09-20T17:57:49.8109010Z 
+2025-09-20T17:57:49.8109741Z === All tests completed ===
+2025-09-20T17:57:49.8110187Z 

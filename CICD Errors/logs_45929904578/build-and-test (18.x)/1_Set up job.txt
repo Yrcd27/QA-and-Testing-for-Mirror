@@ -1,0 +1,31 @@
+﻿2025-09-20T17:56:47.1437294Z Current runner version: '2.328.0'
+2025-09-20T17:56:47.1468239Z ##[group]Runner Image Provisioner
+2025-09-20T17:56:47.1469103Z Hosted Compute Agent
+2025-09-20T17:56:47.1469631Z Version: 20250829.383
+2025-09-20T17:56:47.1470301Z Commit: 27cb235aab5b0e52e153a26cd86b4742e89dac5d
+2025-09-20T17:56:47.1470969Z Build Date: 2025-08-29T13:48:48Z
+2025-09-20T17:56:47.1471864Z ##[endgroup]
+2025-09-20T17:56:47.1472826Z ##[group]Operating System
+2025-09-20T17:56:47.1473521Z Ubuntu
+2025-09-20T17:56:47.1473973Z 24.04.3
+2025-09-20T17:56:47.1474423Z LTS
+2025-09-20T17:56:47.1474942Z ##[endgroup]
+2025-09-20T17:56:47.1475435Z ##[group]Runner Image
+2025-09-20T17:56:47.1475980Z Image: ubuntu-24.04
+2025-09-20T17:56:47.1476521Z Version: 20250907.24.1
+2025-09-20T17:56:47.1477542Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250907.24/images/ubuntu/Ubuntu2404-Readme.md
+2025-09-20T17:56:47.1478892Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250907.24
+2025-09-20T17:56:47.1480109Z ##[endgroup]
+2025-09-20T17:56:47.1481271Z ##[group]GITHUB_TOKEN Permissions
+2025-09-20T17:56:47.1483752Z Contents: read
+2025-09-20T17:56:47.1484317Z Metadata: read
+2025-09-20T17:56:47.1484877Z Packages: read
+2025-09-20T17:56:47.1485395Z ##[endgroup]
+2025-09-20T17:56:47.1487557Z Secret source: Actions
+2025-09-20T17:56:47.1488636Z Prepare workflow directory
+2025-09-20T17:56:47.1935246Z Prepare all required actions
+2025-09-20T17:56:47.1974580Z Getting action download info
+2025-09-20T17:56:47.5308516Z Download action repository 'actions/checkout@v3' (SHA:f43a0e5ff2bd294095638e18286ca9a3d1956744)
+2025-09-20T17:56:47.7505367Z Download action repository 'actions/setup-node@v3' (SHA:3235b876344d2a9aa001b8d1453c930bba69e610)
+2025-09-20T17:56:48.1259219Z Download action repository 'browser-actions/setup-chrome@v1' (SHA:c785b87e244131f27c9f19c1a33e2ead956ab7ce)
+2025-09-20T17:56:48.5253919Z Complete job name: build-and-test (18.x)

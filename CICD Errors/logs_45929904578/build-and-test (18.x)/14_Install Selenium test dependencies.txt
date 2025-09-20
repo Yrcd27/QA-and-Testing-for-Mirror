@@ -1,0 +1,26 @@
+﻿2025-09-20T17:57:49.8263356Z ##[group]Run npm install
+2025-09-20T17:57:49.8263630Z [36;1mnpm install[0m
+2025-09-20T17:57:49.8293546Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:49.8293789Z ##[endgroup]
+2025-09-20T17:57:50.2964155Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:57:50.2965356Z npm warn EBADENGINE   package: 'chromedriver@140.0.3',
+2025-09-20T17:57:50.2966652Z npm warn EBADENGINE   required: { node: '>=20' },
+2025-09-20T17:57:50.2967784Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:57:50.2968361Z npm warn EBADENGINE }
+2025-09-20T17:57:50.2989042Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:57:50.2989893Z npm warn EBADENGINE   package: 'selenium-webdriver@4.35.0',
+2025-09-20T17:57:50.2990764Z npm warn EBADENGINE   required: { node: '>= 20.0.0' },
+2025-09-20T17:57:50.2991850Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:57:50.2992577Z npm warn EBADENGINE }
+2025-09-20T17:57:50.7946869Z 
+2025-09-20T17:57:50.7947574Z up to date, audited 248 packages in 893ms
+2025-09-20T17:57:50.7948052Z 
+2025-09-20T17:57:50.7948603Z 31 packages are looking for funding
+2025-09-20T17:57:50.7949167Z   run `npm fund` for details
+2025-09-20T17:57:50.7999401Z 
+2025-09-20T17:57:50.8000069Z 5 vulnerabilities (3 moderate, 2 critical)
+2025-09-20T17:57:50.8000444Z 
+2025-09-20T17:57:50.8000763Z Some issues need review, and may require choosing
+2025-09-20T17:57:50.8001293Z a different dependency.
+2025-09-20T17:57:50.8001777Z 
+2025-09-20T17:57:50.8001974Z Run `npm audit` for details.

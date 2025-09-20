@@ -1,0 +1,22 @@
+﻿2025-09-20T17:57:10.4083826Z ##[group]Run actions/setup-node@v3
+2025-09-20T17:57:10.4084124Z with:
+2025-09-20T17:57:10.4084300Z   node-version: 18.x
+2025-09-20T17:57:10.4084494Z   cache: npm
+2025-09-20T17:57:10.4084665Z   always-auth: false
+2025-09-20T17:57:10.4084853Z   check-latest: false
+2025-09-20T17:57:10.4085163Z   token: ***
+2025-09-20T17:57:10.4085335Z ##[endgroup]
+2025-09-20T17:57:10.6132157Z Found in cache @ /opt/hostedtoolcache/node/18.20.8/x64
+2025-09-20T17:57:10.6139085Z ##[group]Environment details
+2025-09-20T17:57:12.8544159Z node: v18.20.8
+2025-09-20T17:57:12.8544548Z npm: 10.8.2
+2025-09-20T17:57:12.8544825Z yarn: 1.22.22
+2025-09-20T17:57:12.8545742Z ##[endgroup]
+2025-09-20T17:57:12.8561237Z [command]/opt/hostedtoolcache/node/18.20.8/x64/bin/npm config get cache
+2025-09-20T17:57:13.1963624Z /home/runner/.npm
+2025-09-20T17:57:13.3626965Z Cache hit for: node-cache-Linux-npm-bd42ca2bb42da82ab0533556244ceb5e1b06051cd1df7c133feb786626601218
+2025-09-20T17:57:14.2022398Z Received 73146295 of 73146295 (100.0%), 95.2 MBs/sec
+2025-09-20T17:57:14.2052341Z Cache Size: ~70 MB (73146295 B)
+2025-09-20T17:57:14.2150744Z [command]/usr/bin/tar -xf /home/runner/work/_temp/16449179-93b2-465f-83db-6f87de117335/cache.tzst -P -C /home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror --use-compress-program unzstd
+2025-09-20T17:57:14.5519939Z Cache restored successfully
+2025-09-20T17:57:14.5675632Z Cache restored from key: node-cache-Linux-npm-bd42ca2bb42da82ab0533556244ceb5e1b06051cd1df7c133feb786626601218

@@ -1,0 +1,18 @@
+﻿2025-09-20T17:57:50.8170143Z ##[group]Run browser-actions/setup-chrome@v1
+2025-09-20T17:57:50.8170469Z with:
+2025-09-20T17:57:50.8170652Z   chrome-version: stable
+2025-09-20T17:57:50.8170876Z   install-dependencies: false
+2025-09-20T17:57:50.8171112Z   install-chromedriver: false
+2025-09-20T17:57:50.8171323Z   no-sudo: false
+2025-09-20T17:57:50.8171717Z ##[endgroup]
+2025-09-20T17:57:50.8962523Z Setup chrome stable
+2025-09-20T17:57:50.8973678Z Attempting to download chrome stable...
+2025-09-20T17:57:50.8975281Z Acquiring chrome stable from https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+2025-09-20T17:57:51.8947321Z Installing chrome...
+2025-09-20T17:57:51.8983319Z [command]/usr/bin/ar x /home/runner/work/_temp/2e777de2-deb0-48f4-8c87-e39777aab173
+2025-09-20T17:57:52.1209767Z [command]/usr/bin/tar -xf /tmp/deb-dwUJxO/data.tar.xz --directory /tmp/chrome-GZGb6o --strip-components 4 ./opt/google
+2025-09-20T17:57:59.5930429Z Successfully Installed chromium to /opt/hostedtoolcache/setup-chrome/chromium/stable/x64
+2025-09-20T17:57:59.5939426Z [command]/opt/hostedtoolcache/setup-chrome/chromium/stable/x64/chrome --version
+2025-09-20T17:57:59.9093958Z [0920/175759.908489:WARNING:chrome/app/chrome_main_linux.cc:82] Read channel stable from /opt/hostedtoolcache/setup-chrome/chromium/stable/x64/CHROME_VERSION_EXTRA
+2025-09-20T17:57:59.9095407Z Google Chrome 140.0.7339.185 
+2025-09-20T17:57:59.9834635Z Successfully setup chromium 140.0.7339.185

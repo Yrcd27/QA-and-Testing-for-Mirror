@@ -1,0 +1,4 @@
+﻿2025-09-20T17:57:20.1176632Z ##[group]Run cp .github/workflows/.env.ci mirror-backend/.env
+2025-09-20T17:57:20.1177135Z [36;1mcp .github/workflows/.env.ci mirror-backend/.env[0m
+2025-09-20T17:57:20.1207458Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:20.1207734Z ##[endgroup]

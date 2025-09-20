@@ -1,0 +1,1056 @@
+﻿2025-09-20T17:56:47.1437960Z Current runner version: '2.328.0'
+2025-09-20T17:56:47.1468273Z ##[group]Runner Image Provisioner
+2025-09-20T17:56:47.1469109Z Hosted Compute Agent
+2025-09-20T17:56:47.1469634Z Version: 20250829.383
+2025-09-20T17:56:47.1470305Z Commit: 27cb235aab5b0e52e153a26cd86b4742e89dac5d
+2025-09-20T17:56:47.1470973Z Build Date: 2025-08-29T13:48:48Z
+2025-09-20T17:56:47.1471874Z ##[endgroup]
+2025-09-20T17:56:47.1472836Z ##[group]Operating System
+2025-09-20T17:56:47.1473525Z Ubuntu
+2025-09-20T17:56:47.1473976Z 24.04.3
+2025-09-20T17:56:47.1474426Z LTS
+2025-09-20T17:56:47.1474945Z ##[endgroup]
+2025-09-20T17:56:47.1475438Z ##[group]Runner Image
+2025-09-20T17:56:47.1475983Z Image: ubuntu-24.04
+2025-09-20T17:56:47.1476525Z Version: 20250907.24.1
+2025-09-20T17:56:47.1477548Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250907.24/images/ubuntu/Ubuntu2404-Readme.md
+2025-09-20T17:56:47.1479163Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250907.24
+2025-09-20T17:56:47.1480113Z ##[endgroup]
+2025-09-20T17:56:47.1481275Z ##[group]GITHUB_TOKEN Permissions
+2025-09-20T17:56:47.1483774Z Contents: read
+2025-09-20T17:56:47.1484321Z Metadata: read
+2025-09-20T17:56:47.1484881Z Packages: read
+2025-09-20T17:56:47.1485397Z ##[endgroup]
+2025-09-20T17:56:47.1487575Z Secret source: Actions
+2025-09-20T17:56:47.1488644Z Prepare workflow directory
+2025-09-20T17:56:47.1935329Z Prepare all required actions
+2025-09-20T17:56:47.1974637Z Getting action download info
+2025-09-20T17:56:47.5308561Z Download action repository 'actions/checkout@v3' (SHA:f43a0e5ff2bd294095638e18286ca9a3d1956744)
+2025-09-20T17:56:47.7505407Z Download action repository 'actions/setup-node@v3' (SHA:3235b876344d2a9aa001b8d1453c930bba69e610)
+2025-09-20T17:56:48.1259311Z Download action repository 'browser-actions/setup-chrome@v1' (SHA:c785b87e244131f27c9f19c1a33e2ead956ab7ce)
+2025-09-20T17:56:48.5253970Z Complete job name: build-and-test (18.x)
+2025-09-20T17:56:48.5846701Z ##[group]Checking docker version
+2025-09-20T17:56:48.5861074Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2025-09-20T17:56:48.6992544Z '1.48'
+2025-09-20T17:56:48.7006999Z Docker daemon API version: '1.48'
+2025-09-20T17:56:48.7008437Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2025-09-20T17:56:48.7203489Z '1.48'
+2025-09-20T17:56:48.7219723Z Docker client API version: '1.48'
+2025-09-20T17:56:48.7226808Z ##[endgroup]
+2025-09-20T17:56:48.7230865Z ##[group]Clean up resources from previous jobs
+2025-09-20T17:56:48.7237455Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=8c523e"
+2025-09-20T17:56:48.7400784Z ##[command]/usr/bin/docker network prune --force --filter "label=8c523e"
+2025-09-20T17:56:48.7563909Z ##[endgroup]
+2025-09-20T17:56:48.7564879Z ##[group]Create local container network
+2025-09-20T17:56:48.7576774Z ##[command]/usr/bin/docker network create --label 8c523e github_network_a11c0c3be1974e5ea45419bcc9f68b43
+2025-09-20T17:56:48.8101853Z 2b70ef54465f2858273131a4dc4037b167b9a21391b4577ac05d5519d4f2783a
+2025-09-20T17:56:48.8123261Z ##[endgroup]
+2025-09-20T17:56:48.8149635Z ##[group]Starting mongodb service container
+2025-09-20T17:56:48.8170331Z ##[command]/usr/bin/docker pull mongo:4.4
+2025-09-20T17:56:49.2892047Z 4.4: Pulling from library/mongo
+2025-09-20T17:56:49.4060235Z d4c3c94e5e10: Pulling fs layer
+2025-09-20T17:56:49.4068154Z bca5893fe8bd: Pulling fs layer
+2025-09-20T17:56:49.4069088Z 35ec036951f8: Pulling fs layer
+2025-09-20T17:56:49.4069572Z ddb77a597b02: Pulling fs layer
+2025-09-20T17:56:49.4069963Z 7ab9eb5a4d9d: Pulling fs layer
+2025-09-20T17:56:49.4070366Z a6c1ba219414: Pulling fs layer
+2025-09-20T17:56:49.4070875Z 83b651df5384: Pulling fs layer
+2025-09-20T17:56:49.4071715Z e233f2d1b360: Pulling fs layer
+2025-09-20T17:56:49.4072251Z 7ab9eb5a4d9d: Waiting
+2025-09-20T17:56:49.4072693Z a6c1ba219414: Waiting
+2025-09-20T17:56:49.4073153Z 83b651df5384: Waiting
+2025-09-20T17:56:49.4073624Z e233f2d1b360: Waiting
+2025-09-20T17:56:49.4074083Z ddb77a597b02: Waiting
+2025-09-20T17:56:49.5417566Z bca5893fe8bd: Verifying Checksum
+2025-09-20T17:56:49.5418142Z bca5893fe8bd: Download complete
+2025-09-20T17:56:49.5506132Z 35ec036951f8: Verifying Checksum
+2025-09-20T17:56:49.5506856Z 35ec036951f8: Download complete
+2025-09-20T17:56:49.6758366Z 7ab9eb5a4d9d: Download complete
+2025-09-20T17:56:49.6819829Z ddb77a597b02: Verifying Checksum
+2025-09-20T17:56:49.6820567Z ddb77a597b02: Download complete
+2025-09-20T17:56:49.7961749Z a6c1ba219414: Verifying Checksum
+2025-09-20T17:56:49.7963384Z a6c1ba219414: Download complete
+2025-09-20T17:56:49.8744249Z d4c3c94e5e10: Verifying Checksum
+2025-09-20T17:56:49.8744755Z d4c3c94e5e10: Download complete
+2025-09-20T17:56:49.9209238Z e233f2d1b360: Verifying Checksum
+2025-09-20T17:56:49.9209859Z e233f2d1b360: Download complete
+2025-09-20T17:56:50.9488992Z d4c3c94e5e10: Pull complete
+2025-09-20T17:56:51.0107754Z 83b651df5384: Verifying Checksum
+2025-09-20T17:56:51.0108397Z 83b651df5384: Download complete
+2025-09-20T17:56:52.0021274Z bca5893fe8bd: Pull complete
+2025-09-20T17:56:52.1621001Z 35ec036951f8: Pull complete
+2025-09-20T17:56:52.2075145Z ddb77a597b02: Pull complete
+2025-09-20T17:56:52.2212425Z 7ab9eb5a4d9d: Pull complete
+2025-09-20T17:56:52.2338988Z a6c1ba219414: Pull complete
+2025-09-20T17:56:54.6503026Z 83b651df5384: Pull complete
+2025-09-20T17:56:54.6706547Z e233f2d1b360: Pull complete
+2025-09-20T17:56:54.6769680Z Digest: sha256:52c42cbab240b3c5b1748582cc13ef46d521ddacae002bbbda645cebed270ec0
+2025-09-20T17:56:54.6787417Z Status: Downloaded newer image for mongo:4.4
+2025-09-20T17:56:54.6800900Z docker.io/library/mongo:4.4
+2025-09-20T17:56:54.6839348Z ##[command]/usr/bin/docker create --name ecf87f42281f49159ff7a1368afcf860_mongo44_23dae1 --label 8c523e --network github_network_a11c0c3be1974e5ea45419bcc9f68b43 --network-alias mongodb -p 27017:27017 --health-cmd "mongo --eval 'db.runCommand({ ping: 1 })'" --health-interval 10s --health-timeout 5s --health-retries 5 -e GITHUB_ACTIONS=true -e CI=true mongo:4.4
+2025-09-20T17:56:54.7154428Z b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:56:54.7181792Z ##[command]/usr/bin/docker start b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:56:55.0613008Z b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:56:55.0636159Z ##[command]/usr/bin/docker ps --all --filter id=b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2025-09-20T17:56:55.0797567Z b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d Up Less than a second (health: starting)
+2025-09-20T17:56:55.0834934Z ##[command]/usr/bin/docker port b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:56:55.0976728Z 27017/tcp -> 0.0.0.0:27017
+2025-09-20T17:56:55.0977250Z 27017/tcp -> [::]:27017
+2025-09-20T17:56:55.1042969Z ##[endgroup]
+2025-09-20T17:56:55.1054175Z ##[group]Waiting for all services to be ready
+2025-09-20T17:56:55.1071072Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:56:55.1211965Z starting
+2025-09-20T17:56:55.1239197Z mongodb service is starting, waiting 2 seconds before checking again.
+2025-09-20T17:56:57.1229769Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:56:57.1359380Z starting
+2025-09-20T17:56:57.1375600Z mongodb service is starting, waiting 4 seconds before checking again.
+2025-09-20T17:57:01.4627656Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:57:01.4756695Z starting
+2025-09-20T17:57:01.4772330Z mongodb service is starting, waiting 7 seconds before checking again.
+2025-09-20T17:57:08.6495323Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:57:08.6629068Z healthy
+2025-09-20T17:57:08.6650076Z mongodb service is healthy.
+2025-09-20T17:57:08.6651037Z ##[endgroup]
+2025-09-20T17:57:08.6876066Z ##[group]Run actions/checkout@v3
+2025-09-20T17:57:08.6876592Z with:
+2025-09-20T17:57:08.6876824Z   repository: Yrcd27/QA-and-Testing-for-Mirror
+2025-09-20T17:57:08.6877269Z   token: ***
+2025-09-20T17:57:08.6877451Z   ssh-strict: true
+2025-09-20T17:57:08.6877645Z   persist-credentials: true
+2025-09-20T17:57:08.6877859Z   clean: true
+2025-09-20T17:57:08.6878049Z   sparse-checkout-cone-mode: true
+2025-09-20T17:57:08.6878269Z   fetch-depth: 1
+2025-09-20T17:57:08.6878496Z   fetch-tags: false
+2025-09-20T17:57:08.6878663Z   lfs: false
+2025-09-20T17:57:08.6878826Z   submodules: false
+2025-09-20T17:57:08.6879006Z   set-safe-directory: true
+2025-09-20T17:57:08.6879402Z ##[endgroup]
+2025-09-20T17:57:08.7742403Z Syncing repository: Yrcd27/QA-and-Testing-for-Mirror
+2025-09-20T17:57:08.7743744Z ##[group]Getting Git version info
+2025-09-20T17:57:08.7744221Z Working directory is '/home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror'
+2025-09-20T17:57:08.7744918Z [command]/usr/bin/git version
+2025-09-20T17:57:08.7838465Z git version 2.51.0
+2025-09-20T17:57:08.7867618Z ##[endgroup]
+2025-09-20T17:57:08.7884909Z Temporarily overriding HOME='/home/runner/work/_temp/6009d589-9a9b-402c-803a-60d7de7e2304' before making global git config changes
+2025-09-20T17:57:08.7886108Z Adding repository directory to the temporary git global config as a safe directory
+2025-09-20T17:57:08.7889865Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror
+2025-09-20T17:57:08.7927390Z Deleting the contents of '/home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror'
+2025-09-20T17:57:08.7931075Z ##[group]Initializing the repository
+2025-09-20T17:57:08.7934618Z [command]/usr/bin/git init /home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror
+2025-09-20T17:57:08.8042641Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-09-20T17:57:08.8043832Z hint: is subject to change. To configure the initial branch name to use in all
+2025-09-20T17:57:08.8044820Z hint: of your new repositories, which will suppress this warning, call:
+2025-09-20T17:57:08.8045628Z hint:
+2025-09-20T17:57:08.8046576Z hint: 	git config --global init.defaultBranch <name>
+2025-09-20T17:57:08.8047231Z hint:
+2025-09-20T17:57:08.8047893Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-09-20T17:57:08.8048731Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-09-20T17:57:08.8049196Z hint:
+2025-09-20T17:57:08.8049436Z hint: 	git branch -m <name>
+2025-09-20T17:57:08.8049711Z hint:
+2025-09-20T17:57:08.8050123Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2025-09-20T17:57:08.8050947Z Initialized empty Git repository in /home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/.git/
+2025-09-20T17:57:08.8058069Z [command]/usr/bin/git remote add origin https://github.com/Yrcd27/QA-and-Testing-for-Mirror
+2025-09-20T17:57:08.8130353Z ##[endgroup]
+2025-09-20T17:57:08.8130989Z ##[group]Disabling automatic garbage collection
+2025-09-20T17:57:08.8131730Z [command]/usr/bin/git config --local gc.auto 0
+2025-09-20T17:57:08.8137080Z ##[endgroup]
+2025-09-20T17:57:08.8137587Z ##[group]Setting up auth
+2025-09-20T17:57:08.8145851Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-09-20T17:57:08.8177133Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-09-20T17:57:08.8521774Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-09-20T17:57:08.8551098Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-09-20T17:57:08.8776984Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-09-20T17:57:08.8813815Z ##[endgroup]
+2025-09-20T17:57:08.8814438Z ##[group]Fetching the repository
+2025-09-20T17:57:08.8821938Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +edd03d7eb150faab181687f942236f37effc0737:refs/remotes/origin/main
+2025-09-20T17:57:09.0945133Z remote: Enumerating objects: 3776, done.        
+2025-09-20T17:57:09.0946051Z remote: Counting objects:   0% (1/3776)        
+2025-09-20T17:57:09.0946602Z remote: Counting objects:   1% (38/3776)        
+2025-09-20T17:57:09.0947267Z remote: Counting objects:   2% (76/3776)        
+2025-09-20T17:57:09.0947909Z remote: Counting objects:   3% (114/3776)        
+2025-09-20T17:57:09.0948562Z remote: Counting objects:   4% (152/3776)        
+2025-09-20T17:57:09.0949283Z remote: Counting objects:   5% (189/3776)        
+2025-09-20T17:57:09.0949872Z remote: Counting objects:   6% (227/3776)        
+2025-09-20T17:57:09.0950304Z remote: Counting objects:   7% (265/3776)        
+2025-09-20T17:57:09.0950762Z remote: Counting objects:   8% (303/3776)        
+2025-09-20T17:57:09.0951199Z remote: Counting objects:   9% (340/3776)        
+2025-09-20T17:57:09.0951925Z remote: Counting objects:  10% (378/3776)        
+2025-09-20T17:57:09.0952363Z remote: Counting objects:  11% (416/3776)        
+2025-09-20T17:57:09.0952787Z remote: Counting objects:  12% (454/3776)        
+2025-09-20T17:57:09.0953217Z remote: Counting objects:  13% (491/3776)        
+2025-09-20T17:57:09.0953644Z remote: Counting objects:  14% (529/3776)        
+2025-09-20T17:57:09.0954107Z remote: Counting objects:  15% (567/3776)        
+2025-09-20T17:57:09.0954537Z remote: Counting objects:  16% (605/3776)        
+2025-09-20T17:57:09.0954963Z remote: Counting objects:  17% (642/3776)        
+2025-09-20T17:57:09.0955399Z remote: Counting objects:  18% (680/3776)        
+2025-09-20T17:57:09.0955821Z remote: Counting objects:  19% (718/3776)        
+2025-09-20T17:57:09.0956121Z remote: Counting objects:  20% (756/3776)        
+2025-09-20T17:57:09.1107198Z remote: Counting objects:  21% (793/3776)        
+2025-09-20T17:57:09.1110173Z remote: Counting objects:  22% (831/3776)        
+2025-09-20T17:57:09.1110703Z remote: Counting objects:  23% (869/3776)        
+2025-09-20T17:57:09.1111216Z remote: Counting objects:  24% (907/3776)        
+2025-09-20T17:57:09.1111957Z remote: Counting objects:  25% (944/3776)        
+2025-09-20T17:57:09.1112460Z remote: Counting objects:  26% (982/3776)        
+2025-09-20T17:57:09.1112971Z remote: Counting objects:  27% (1020/3776)        
+2025-09-20T17:57:09.1113555Z remote: Counting objects:  28% (1058/3776)        
+2025-09-20T17:57:09.1114091Z remote: Counting objects:  29% (1096/3776)        
+2025-09-20T17:57:09.1114635Z remote: Counting objects:  30% (1133/3776)        
+2025-09-20T17:57:09.1115136Z remote: Counting objects:  31% (1171/3776)        
+2025-09-20T17:57:09.1115656Z remote: Counting objects:  32% (1209/3776)        
+2025-09-20T17:57:09.1116149Z remote: Counting objects:  33% (1247/3776)        
+2025-09-20T17:57:09.1116622Z remote: Counting objects:  34% (1284/3776)        
+2025-09-20T17:57:09.1117104Z remote: Counting objects:  35% (1322/3776)        
+2025-09-20T17:57:09.1117586Z remote: Counting objects:  36% (1360/3776)        
+2025-09-20T17:57:09.1118096Z remote: Counting objects:  37% (1398/3776)        
+2025-09-20T17:57:09.1118605Z remote: Counting objects:  38% (1435/3776)        
+2025-09-20T17:57:09.1119096Z remote: Counting objects:  39% (1473/3776)        
+2025-09-20T17:57:09.1119589Z remote: Counting objects:  40% (1511/3776)        
+2025-09-20T17:57:09.1120094Z remote: Counting objects:  41% (1549/3776)        
+2025-09-20T17:57:09.1121121Z remote: Counting objects:  42% (1586/3776)        
+2025-09-20T17:57:09.1121854Z remote: Counting objects:  43% (1624/3776)        
+2025-09-20T17:57:09.1122337Z remote: Counting objects:  44% (1662/3776)        
+2025-09-20T17:57:09.1123083Z remote: Counting objects:  45% (1700/3776)        
+2025-09-20T17:57:09.1123617Z remote: Counting objects:  46% (1737/3776)        
+2025-09-20T17:57:09.1124101Z remote: Counting objects:  47% (1775/3776)        
+2025-09-20T17:57:09.1124563Z remote: Counting objects:  48% (1813/3776)        
+2025-09-20T17:57:09.1125038Z remote: Counting objects:  49% (1851/3776)        
+2025-09-20T17:57:09.1125491Z remote: Counting objects:  50% (1888/3776)        
+2025-09-20T17:57:09.1125978Z remote: Counting objects:  51% (1926/3776)        
+2025-09-20T17:57:09.1126439Z remote: Counting objects:  52% (1964/3776)        
+2025-09-20T17:57:09.1126916Z remote: Counting objects:  53% (2002/3776)        
+2025-09-20T17:57:09.1127395Z remote: Counting objects:  54% (2040/3776)        
+2025-09-20T17:57:09.1127877Z remote: Counting objects:  55% (2077/3776)        
+2025-09-20T17:57:09.1128355Z remote: Counting objects:  56% (2115/3776)        
+2025-09-20T17:57:09.1128820Z remote: Counting objects:  57% (2153/3776)        
+2025-09-20T17:57:09.1129293Z remote: Counting objects:  58% (2191/3776)        
+2025-09-20T17:57:09.1129755Z remote: Counting objects:  59% (2228/3776)        
+2025-09-20T17:57:09.1130251Z remote: Counting objects:  60% (2266/3776)        
+2025-09-20T17:57:09.1130727Z remote: Counting objects:  61% (2304/3776)        
+2025-09-20T17:57:09.1131206Z remote: Counting objects:  62% (2342/3776)        
+2025-09-20T17:57:09.1131897Z remote: Counting objects:  63% (2379/3776)        
+2025-09-20T17:57:09.1132402Z remote: Counting objects:  64% (2417/3776)        
+2025-09-20T17:57:09.1132882Z remote: Counting objects:  65% (2455/3776)        
+2025-09-20T17:57:09.1133596Z remote: Counting objects:  66% (2493/3776)        
+2025-09-20T17:57:09.1134045Z remote: Counting objects:  67% (2530/3776)        
+2025-09-20T17:57:09.1134511Z remote: Counting objects:  68% (2568/3776)        
+2025-09-20T17:57:09.1134960Z remote: Counting objects:  69% (2606/3776)        
+2025-09-20T17:57:09.1135404Z remote: Counting objects:  70% (2644/3776)        
+2025-09-20T17:57:09.1135869Z remote: Counting objects:  71% (2681/3776)        
+2025-09-20T17:57:09.1136350Z remote: Counting objects:  72% (2719/3776)        
+2025-09-20T17:57:09.1136831Z remote: Counting objects:  73% (2757/3776)        
+2025-09-20T17:57:09.1137306Z remote: Counting objects:  74% (2795/3776)        
+2025-09-20T17:57:09.1137778Z remote: Counting objects:  75% (2832/3776)        
+2025-09-20T17:57:09.1138245Z remote: Counting objects:  76% (2870/3776)        
+2025-09-20T17:57:09.1138726Z remote: Counting objects:  77% (2908/3776)        
+2025-09-20T17:57:09.1139198Z remote: Counting objects:  78% (2946/3776)        
+2025-09-20T17:57:09.1139845Z remote: Counting objects:  79% (2984/3776)        
+2025-09-20T17:57:09.1140312Z remote: Counting objects:  80% (3021/3776)        
+2025-09-20T17:57:09.1140793Z remote: Counting objects:  81% (3059/3776)        
+2025-09-20T17:57:09.1141262Z remote: Counting objects:  82% (3097/3776)        
+2025-09-20T17:57:09.1141931Z remote: Counting objects:  83% (3135/3776)        
+2025-09-20T17:57:09.1142406Z remote: Counting objects:  84% (3172/3776)        
+2025-09-20T17:57:09.1142872Z remote: Counting objects:  85% (3210/3776)        
+2025-09-20T17:57:09.1143346Z remote: Counting objects:  86% (3248/3776)        
+2025-09-20T17:57:09.1143968Z remote: Counting objects:  87% (3286/3776)        
+2025-09-20T17:57:09.1144440Z remote: Counting objects:  88% (3323/3776)        
+2025-09-20T17:57:09.1144918Z remote: Counting objects:  89% (3361/3776)        
+2025-09-20T17:57:09.1145386Z remote: Counting objects:  90% (3399/3776)        
+2025-09-20T17:57:09.1145918Z remote: Counting objects:  91% (3437/3776)        
+2025-09-20T17:57:09.1146382Z remote: Counting objects:  92% (3474/3776)        
+2025-09-20T17:57:09.1146852Z remote: Counting objects:  93% (3512/3776)        
+2025-09-20T17:57:09.1147560Z remote: Counting objects:  94% (3550/3776)        
+2025-09-20T17:57:09.1148191Z remote: Counting objects:  95% (3588/3776)        
+2025-09-20T17:57:09.1148868Z remote: Counting objects:  96% (3625/3776)        
+2025-09-20T17:57:09.1149363Z remote: Counting objects:  97% (3663/3776)        
+2025-09-20T17:57:09.1149842Z remote: Counting objects:  98% (3701/3776)        
+2025-09-20T17:57:09.1150311Z remote: Counting objects:  99% (3739/3776)        
+2025-09-20T17:57:09.1150781Z remote: Counting objects: 100% (3776/3776)        
+2025-09-20T17:57:09.1151290Z remote: Counting objects: 100% (3776/3776), done.        
+2025-09-20T17:57:09.1152042Z remote: Compressing objects:   0% (1/3156)        
+2025-09-20T17:57:09.1152578Z remote: Compressing objects:   1% (32/3156)        
+2025-09-20T17:57:09.1153089Z remote: Compressing objects:   2% (64/3156)        
+2025-09-20T17:57:09.1153612Z remote: Compressing objects:   3% (95/3156)        
+2025-09-20T17:57:09.1154140Z remote: Compressing objects:   4% (127/3156)        
+2025-09-20T17:57:09.1154661Z remote: Compressing objects:   5% (158/3156)        
+2025-09-20T17:57:09.1155191Z remote: Compressing objects:   6% (190/3156)        
+2025-09-20T17:57:09.1155709Z remote: Compressing objects:   7% (221/3156)        
+2025-09-20T17:57:09.1156238Z remote: Compressing objects:   8% (253/3156)        
+2025-09-20T17:57:09.1156755Z remote: Compressing objects:   9% (285/3156)        
+2025-09-20T17:57:09.1157281Z remote: Compressing objects:  10% (316/3156)        
+2025-09-20T17:57:09.1157800Z remote: Compressing objects:  11% (348/3156)        
+2025-09-20T17:57:09.1158299Z remote: Compressing objects:  12% (379/3156)        
+2025-09-20T17:57:09.1158810Z remote: Compressing objects:  13% (411/3156)        
+2025-09-20T17:57:09.1159309Z remote: Compressing objects:  14% (442/3156)        
+2025-09-20T17:57:09.1159819Z remote: Compressing objects:  15% (474/3156)        
+2025-09-20T17:57:09.1160323Z remote: Compressing objects:  16% (505/3156)        
+2025-09-20T17:57:09.1160852Z remote: Compressing objects:  17% (537/3156)        
+2025-09-20T17:57:09.1161367Z remote: Compressing objects:  18% (569/3156)        
+2025-09-20T17:57:09.1162116Z remote: Compressing objects:  19% (600/3156)        
+2025-09-20T17:57:09.1162640Z remote: Compressing objects:  20% (632/3156)        
+2025-09-20T17:57:09.1163166Z remote: Compressing objects:  21% (663/3156)        
+2025-09-20T17:57:09.1163695Z remote: Compressing objects:  22% (695/3156)        
+2025-09-20T17:57:09.1164197Z remote: Compressing objects:  23% (726/3156)        
+2025-09-20T17:57:09.1164700Z remote: Compressing objects:  24% (758/3156)        
+2025-09-20T17:57:09.1165201Z remote: Compressing objects:  25% (789/3156)        
+2025-09-20T17:57:09.1165703Z remote: Compressing objects:  26% (821/3156)        
+2025-09-20T17:57:09.1166201Z remote: Compressing objects:  27% (853/3156)        
+2025-09-20T17:57:09.1166695Z remote: Compressing objects:  28% (884/3156)        
+2025-09-20T17:57:09.1167211Z remote: Compressing objects:  29% (916/3156)        
+2025-09-20T17:57:09.1167713Z remote: Compressing objects:  30% (947/3156)        
+2025-09-20T17:57:09.1168233Z remote: Compressing objects:  31% (979/3156)        
+2025-09-20T17:57:09.1168778Z remote: Compressing objects:  32% (1010/3156)        
+2025-09-20T17:57:09.1169323Z remote: Compressing objects:  33% (1042/3156)        
+2025-09-20T17:57:09.1169847Z remote: Compressing objects:  34% (1074/3156)        
+2025-09-20T17:57:09.1170382Z remote: Compressing objects:  35% (1105/3156)        
+2025-09-20T17:57:09.1170923Z remote: Compressing objects:  36% (1137/3156)        
+2025-09-20T17:57:09.1171670Z remote: Compressing objects:  37% (1168/3156)        
+2025-09-20T17:57:09.1172190Z remote: Compressing objects:  38% (1200/3156)        
+2025-09-20T17:57:09.1172707Z remote: Compressing objects:  39% (1231/3156)        
+2025-09-20T17:57:09.1173232Z remote: Compressing objects:  40% (1263/3156)        
+2025-09-20T17:57:09.1173743Z remote: Compressing objects:  41% (1294/3156)        
+2025-09-20T17:57:09.1174566Z remote: Compressing objects:  42% (1326/3156)        
+2025-09-20T17:57:09.1175093Z remote: Compressing objects:  43% (1358/3156)        
+2025-09-20T17:57:09.1175820Z remote: Compressing objects:  44% (1389/3156)        
+2025-09-20T17:57:09.1176376Z remote: Compressing objects:  45% (1421/3156)        
+2025-09-20T17:57:09.1176888Z remote: Compressing objects:  46% (1452/3156)        
+2025-09-20T17:57:09.1177401Z remote: Compressing objects:  47% (1484/3156)        
+2025-09-20T17:57:09.1177880Z remote: Compressing objects:  48% (1515/3156)        
+2025-09-20T17:57:09.1178399Z remote: Compressing objects:  49% (1547/3156)        
+2025-09-20T17:57:09.1178903Z remote: Compressing objects:  50% (1578/3156)        
+2025-09-20T17:57:09.1179412Z remote: Compressing objects:  51% (1610/3156)        
+2025-09-20T17:57:09.1179924Z remote: Compressing objects:  52% (1642/3156)        
+2025-09-20T17:57:09.1180435Z remote: Compressing objects:  53% (1673/3156)        
+2025-09-20T17:57:09.1180963Z remote: Compressing objects:  54% (1705/3156)        
+2025-09-20T17:57:09.1181719Z remote: Compressing objects:  55% (1736/3156)        
+2025-09-20T17:57:09.1182244Z remote: Compressing objects:  56% (1768/3156)        
+2025-09-20T17:57:09.1182771Z remote: Compressing objects:  57% (1799/3156)        
+2025-09-20T17:57:09.1183273Z remote: Compressing objects:  58% (1831/3156)        
+2025-09-20T17:57:09.1183807Z remote: Compressing objects:  59% (1863/3156)        
+2025-09-20T17:57:09.1184419Z remote: Compressing objects:  60% (1894/3156)        
+2025-09-20T17:57:09.1184953Z remote: Compressing objects:  61% (1926/3156)        
+2025-09-20T17:57:09.1185495Z remote: Compressing objects:  62% (1957/3156)        
+2025-09-20T17:57:09.1186021Z remote: Compressing objects:  63% (1989/3156)        
+2025-09-20T17:57:09.1186564Z remote: Compressing objects:  64% (2020/3156)        
+2025-09-20T17:57:09.1187081Z remote: Compressing objects:  65% (2052/3156)        
+2025-09-20T17:57:09.1187617Z remote: Compressing objects:  66% (2083/3156)        
+2025-09-20T17:57:09.1188131Z remote: Compressing objects:  67% (2115/3156)        
+2025-09-20T17:57:09.1188659Z remote: Compressing objects:  68% (2147/3156)        
+2025-09-20T17:57:09.1189172Z remote: Compressing objects:  69% (2178/3156)        
+2025-09-20T17:57:09.1189682Z remote: Compressing objects:  70% (2210/3156)        
+2025-09-20T17:57:09.1190193Z remote: Compressing objects:  71% (2241/3156)        
+2025-09-20T17:57:09.1190710Z remote: Compressing objects:  72% (2273/3156)        
+2025-09-20T17:57:09.1191221Z remote: Compressing objects:  73% (2304/3156)        
+2025-09-20T17:57:09.1191929Z remote: Compressing objects:  74% (2336/3156)        
+2025-09-20T17:57:09.1192437Z remote: Compressing objects:  75% (2367/3156)        
+2025-09-20T17:57:09.1192941Z remote: Compressing objects:  76% (2399/3156)        
+2025-09-20T17:57:09.1193452Z remote: Compressing objects:  77% (2431/3156)        
+2025-09-20T17:57:09.1193954Z remote: Compressing objects:  78% (2462/3156)        
+2025-09-20T17:57:09.1194489Z remote: Compressing objects:  79% (2494/3156)        
+2025-09-20T17:57:09.1194998Z remote: Compressing objects:  80% (2525/3156)        
+2025-09-20T17:57:09.1195513Z remote: Compressing objects:  81% (2557/3156)        
+2025-09-20T17:57:09.1196036Z remote: Compressing objects:  82% (2588/3156)        
+2025-09-20T17:57:09.1196585Z remote: Compressing objects:  83% (2620/3156)        
+2025-09-20T17:57:09.1197142Z remote: Compressing objects:  84% (2652/3156)        
+2025-09-20T17:57:09.1197681Z remote: Compressing objects:  85% (2683/3156)        
+2025-09-20T17:57:09.1198199Z remote: Compressing objects:  86% (2715/3156)        
+2025-09-20T17:57:09.1198726Z remote: Compressing objects:  87% (2746/3156)        
+2025-09-20T17:57:09.1199252Z remote: Compressing objects:  88% (2778/3156)        
+2025-09-20T17:57:09.1199778Z remote: Compressing objects:  89% (2809/3156)        
+2025-09-20T17:57:09.1200345Z remote: Compressing objects:  90% (2841/3156)        
+2025-09-20T17:57:09.1201197Z remote: Compressing objects:  91% (2872/3156)        
+2025-09-20T17:57:09.1201963Z remote: Compressing objects:  92% (2904/3156)        
+2025-09-20T17:57:09.1202518Z remote: Compressing objects:  93% (2936/3156)        
+2025-09-20T17:57:09.1203314Z remote: Compressing objects:  94% (2967/3156)        
+2025-09-20T17:57:09.1203888Z remote: Compressing objects:  95% (2999/3156)        
+2025-09-20T17:57:09.1204412Z remote: Compressing objects:  96% (3030/3156)        
+2025-09-20T17:57:09.1204948Z remote: Compressing objects:  97% (3062/3156)        
+2025-09-20T17:57:09.1205480Z remote: Compressing objects:  98% (3093/3156)        
+2025-09-20T17:57:09.1206026Z remote: Compressing objects:  99% (3125/3156)        
+2025-09-20T17:57:09.1206537Z remote: Compressing objects: 100% (3156/3156)        
+2025-09-20T17:57:09.1207091Z remote: Compressing objects: 100% (3156/3156), done.        
+2025-09-20T17:57:09.1281793Z Receiving objects:   0% (1/3776)
+2025-09-20T17:57:09.1770071Z Receiving objects:   1% (38/3776)
+2025-09-20T17:57:09.1800074Z Receiving objects:   2% (76/3776)
+2025-09-20T17:57:09.2102064Z Receiving objects:   3% (114/3776)
+2025-09-20T17:57:09.2202741Z Receiving objects:   4% (152/3776)
+2025-09-20T17:57:09.2263729Z Receiving objects:   5% (189/3776)
+2025-09-20T17:57:09.2277773Z Receiving objects:   6% (227/3776)
+2025-09-20T17:57:09.2349701Z Receiving objects:   7% (265/3776)
+2025-09-20T17:57:09.2350189Z Receiving objects:   8% (303/3776)
+2025-09-20T17:57:09.2355562Z Receiving objects:   9% (340/3776)
+2025-09-20T17:57:09.2374218Z Receiving objects:  10% (378/3776)
+2025-09-20T17:57:09.2535733Z Receiving objects:  11% (416/3776)
+2025-09-20T17:57:09.2598862Z Receiving objects:  12% (454/3776)
+2025-09-20T17:57:09.2779416Z Receiving objects:  13% (491/3776)
+2025-09-20T17:57:09.2809542Z Receiving objects:  14% (529/3776)
+2025-09-20T17:57:09.2863994Z Receiving objects:  15% (567/3776)
+2025-09-20T17:57:09.2873720Z Receiving objects:  16% (605/3776)
+2025-09-20T17:57:09.2886646Z Receiving objects:  17% (642/3776)
+2025-09-20T17:57:09.2895904Z Receiving objects:  18% (680/3776)
+2025-09-20T17:57:09.2914271Z Receiving objects:  19% (718/3776)
+2025-09-20T17:57:09.2932223Z Receiving objects:  20% (756/3776)
+2025-09-20T17:57:09.2953583Z Receiving objects:  21% (793/3776)
+2025-09-20T17:57:09.3058552Z Receiving objects:  22% (831/3776)
+2025-09-20T17:57:09.3074995Z Receiving objects:  23% (869/3776)
+2025-09-20T17:57:09.3080987Z Receiving objects:  24% (907/3776)
+2025-09-20T17:57:09.3097041Z Receiving objects:  25% (944/3776)
+2025-09-20T17:57:09.3107812Z Receiving objects:  26% (982/3776)
+2025-09-20T17:57:09.3114198Z Receiving objects:  27% (1020/3776)
+2025-09-20T17:57:09.3146462Z Receiving objects:  28% (1058/3776)
+2025-09-20T17:57:09.3165729Z Receiving objects:  29% (1096/3776)
+2025-09-20T17:57:09.3180972Z Receiving objects:  30% (1133/3776)
+2025-09-20T17:57:09.5483635Z Receiving objects:  31% (1171/3776)
+2025-09-20T17:57:09.5489805Z Receiving objects:  32% (1209/3776)
+2025-09-20T17:57:09.5499388Z Receiving objects:  33% (1247/3776)
+2025-09-20T17:57:09.5508068Z Receiving objects:  34% (1284/3776)
+2025-09-20T17:57:09.5520605Z Receiving objects:  35% (1322/3776)
+2025-09-20T17:57:09.5545891Z Receiving objects:  36% (1360/3776)
+2025-09-20T17:57:09.5553943Z Receiving objects:  37% (1398/3776)
+2025-09-20T17:57:09.5557685Z Receiving objects:  38% (1435/3776)
+2025-09-20T17:57:09.5562176Z Receiving objects:  39% (1473/3776)
+2025-09-20T17:57:09.5596723Z Receiving objects:  40% (1511/3776)
+2025-09-20T17:57:09.5604517Z Receiving objects:  41% (1549/3776)
+2025-09-20T17:57:09.5611121Z Receiving objects:  42% (1586/3776)
+2025-09-20T17:57:09.5625013Z Receiving objects:  43% (1624/3776)
+2025-09-20T17:57:09.5633543Z Receiving objects:  44% (1662/3776)
+2025-09-20T17:57:09.5640452Z Receiving objects:  45% (1700/3776)
+2025-09-20T17:57:09.5647208Z Receiving objects:  46% (1737/3776)
+2025-09-20T17:57:09.5658146Z Receiving objects:  47% (1775/3776)
+2025-09-20T17:57:09.5661747Z Receiving objects:  48% (1813/3776)
+2025-09-20T17:57:09.5666055Z Receiving objects:  49% (1851/3776)
+2025-09-20T17:57:09.5762617Z Receiving objects:  50% (1888/3776)
+2025-09-20T17:57:09.5771004Z Receiving objects:  51% (1926/3776)
+2025-09-20T17:57:09.5779340Z Receiving objects:  52% (1964/3776)
+2025-09-20T17:57:09.5788401Z Receiving objects:  53% (2002/3776)
+2025-09-20T17:57:09.5793152Z Receiving objects:  54% (2040/3776)
+2025-09-20T17:57:09.5805369Z Receiving objects:  55% (2077/3776)
+2025-09-20T17:57:09.5839826Z Receiving objects:  56% (2115/3776)
+2025-09-20T17:57:09.5849658Z Receiving objects:  57% (2153/3776)
+2025-09-20T17:57:09.5900967Z Receiving objects:  58% (2191/3776)
+2025-09-20T17:57:09.5911818Z Receiving objects:  59% (2228/3776)
+2025-09-20T17:57:09.5924640Z Receiving objects:  60% (2266/3776)
+2025-09-20T17:57:09.5940965Z Receiving objects:  61% (2304/3776)
+2025-09-20T17:57:09.5954549Z Receiving objects:  62% (2342/3776)
+2025-09-20T17:57:09.5962504Z Receiving objects:  63% (2379/3776)
+2025-09-20T17:57:09.5977445Z Receiving objects:  64% (2417/3776)
+2025-09-20T17:57:09.6143314Z Receiving objects:  65% (2455/3776)
+2025-09-20T17:57:09.6152046Z Receiving objects:  66% (2493/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.6162234Z Receiving objects:  67% (2530/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.6170239Z Receiving objects:  68% (2568/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.6254306Z Receiving objects:  69% (2606/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.6260427Z Receiving objects:  70% (2644/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.6277395Z Receiving objects:  71% (2681/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.6353401Z Receiving objects:  72% (2719/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.6389986Z Receiving objects:  73% (2757/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.6404270Z Receiving objects:  74% (2795/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.6447613Z Receiving objects:  75% (2832/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.6486417Z Receiving objects:  76% (2870/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.7958056Z Receiving objects:  77% (2908/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8432980Z Receiving objects:  78% (2946/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8461999Z Receiving objects:  79% (2984/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8477529Z Receiving objects:  80% (3021/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8487148Z Receiving objects:  81% (3059/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8550892Z Receiving objects:  82% (3097/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8566060Z Receiving objects:  83% (3135/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8573959Z Receiving objects:  84% (3172/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8592874Z Receiving objects:  85% (3210/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8615277Z Receiving objects:  86% (3248/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8637194Z Receiving objects:  87% (3286/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8651852Z Receiving objects:  88% (3323/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8660649Z Receiving objects:  89% (3361/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8670534Z Receiving objects:  90% (3399/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8677882Z Receiving objects:  91% (3437/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8691311Z Receiving objects:  92% (3474/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8706429Z Receiving objects:  93% (3512/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8728452Z Receiving objects:  94% (3550/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8744887Z Receiving objects:  95% (3588/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8755895Z Receiving objects:  96% (3625/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8780004Z Receiving objects:  97% (3663/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8780733Z remote: Total 3776 (delta 452), reused 3769 (delta 451), pack-reused 0 (from 0)        
+2025-09-20T17:57:09.8789712Z Receiving objects:  98% (3701/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8800058Z Receiving objects:  99% (3739/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8800934Z Receiving objects: 100% (3776/3776), 15.64 MiB | 31.28 MiB/s
+2025-09-20T17:57:09.8801916Z Receiving objects: 100% (3776/3776), 25.84 MiB | 33.75 MiB/s, done.
+2025-09-20T17:57:09.8824292Z Resolving deltas:   0% (0/452)
+2025-09-20T17:57:09.8824957Z Resolving deltas:   1% (5/452)
+2025-09-20T17:57:09.8825488Z Resolving deltas:   2% (10/452)
+2025-09-20T17:57:09.8830956Z Resolving deltas:   3% (14/452)
+2025-09-20T17:57:09.8831779Z Resolving deltas:   4% (19/452)
+2025-09-20T17:57:09.8832918Z Resolving deltas:   5% (23/452)
+2025-09-20T17:57:09.8834117Z Resolving deltas:   6% (28/452)
+2025-09-20T17:57:09.8834529Z Resolving deltas:   7% (32/452)
+2025-09-20T17:57:09.8834952Z Resolving deltas:   8% (37/452)
+2025-09-20T17:57:09.8835374Z Resolving deltas:   9% (41/452)
+2025-09-20T17:57:09.8835767Z Resolving deltas:  10% (46/452)
+2025-09-20T17:57:09.8836186Z Resolving deltas:  11% (50/452)
+2025-09-20T17:57:09.8864779Z Resolving deltas:  12% (55/452)
+2025-09-20T17:57:09.8911255Z Resolving deltas:  13% (59/452)
+2025-09-20T17:57:09.8914085Z Resolving deltas:  14% (65/452)
+2025-09-20T17:57:09.8914754Z Resolving deltas:  15% (68/452)
+2025-09-20T17:57:09.8916219Z Resolving deltas:  16% (73/452)
+2025-09-20T17:57:09.8923232Z Resolving deltas:  17% (77/452)
+2025-09-20T17:57:09.8955405Z Resolving deltas:  18% (82/452)
+2025-09-20T17:57:09.8958147Z Resolving deltas:  19% (86/452)
+2025-09-20T17:57:09.8959081Z Resolving deltas:  20% (91/452)
+2025-09-20T17:57:09.8963809Z Resolving deltas:  21% (95/452)
+2025-09-20T17:57:09.8965253Z Resolving deltas:  22% (100/452)
+2025-09-20T17:57:09.8967508Z Resolving deltas:  23% (104/452)
+2025-09-20T17:57:09.8969610Z Resolving deltas:  24% (109/452)
+2025-09-20T17:57:09.8970032Z Resolving deltas:  25% (113/452)
+2025-09-20T17:57:09.8971045Z Resolving deltas:  26% (118/452)
+2025-09-20T17:57:09.8972201Z Resolving deltas:  27% (123/452)
+2025-09-20T17:57:09.8972661Z Resolving deltas:  28% (127/452)
+2025-09-20T17:57:09.8973037Z Resolving deltas:  29% (132/452)
+2025-09-20T17:57:09.8973411Z Resolving deltas:  30% (137/452)
+2025-09-20T17:57:09.8973848Z Resolving deltas:  31% (141/452)
+2025-09-20T17:57:09.8974238Z Resolving deltas:  32% (145/452)
+2025-09-20T17:57:09.8974641Z Resolving deltas:  33% (150/452)
+2025-09-20T17:57:09.8975024Z Resolving deltas:  34% (154/452)
+2025-09-20T17:57:09.8975707Z Resolving deltas:  35% (159/452)
+2025-09-20T17:57:09.8976212Z Resolving deltas:  36% (163/452)
+2025-09-20T17:57:09.8976574Z Resolving deltas:  37% (168/452)
+2025-09-20T17:57:09.8976915Z Resolving deltas:  38% (172/452)
+2025-09-20T17:57:09.8977285Z Resolving deltas:  39% (177/452)
+2025-09-20T17:57:09.8977622Z Resolving deltas:  40% (181/452)
+2025-09-20T17:57:09.8977849Z Resolving deltas:  41% (186/452)
+2025-09-20T17:57:09.8980591Z Resolving deltas:  42% (191/452)
+2025-09-20T17:57:09.8981374Z Resolving deltas:  43% (195/452)
+2025-09-20T17:57:09.8983180Z Resolving deltas:  44% (199/452)
+2025-09-20T17:57:09.8986073Z Resolving deltas:  45% (204/452)
+2025-09-20T17:57:09.8986451Z Resolving deltas:  46% (209/452)
+2025-09-20T17:57:09.8986811Z Resolving deltas:  47% (213/452)
+2025-09-20T17:57:09.8988190Z Resolving deltas:  48% (217/452)
+2025-09-20T17:57:09.8988600Z Resolving deltas:  49% (222/452)
+2025-09-20T17:57:09.8989701Z Resolving deltas:  50% (226/452)
+2025-09-20T17:57:09.9034920Z Resolving deltas:  51% (231/452)
+2025-09-20T17:57:09.9036543Z Resolving deltas:  52% (237/452)
+2025-09-20T17:57:09.9036942Z Resolving deltas:  53% (240/452)
+2025-09-20T17:57:09.9038020Z Resolving deltas:  54% (245/452)
+2025-09-20T17:57:09.9039445Z Resolving deltas:  55% (249/452)
+2025-09-20T17:57:09.9042708Z Resolving deltas:  56% (255/452)
+2025-09-20T17:57:09.9043123Z Resolving deltas:  57% (258/452)
+2025-09-20T17:57:09.9043644Z Resolving deltas:  58% (263/452)
+2025-09-20T17:57:09.9044011Z Resolving deltas:  59% (267/452)
+2025-09-20T17:57:09.9044879Z Resolving deltas:  60% (272/452)
+2025-09-20T17:57:09.9045710Z Resolving deltas:  61% (276/452)
+2025-09-20T17:57:09.9049646Z Resolving deltas:  62% (281/452)
+2025-09-20T17:57:09.9051874Z Resolving deltas:  63% (286/452)
+2025-09-20T17:57:09.9052669Z Resolving deltas:  64% (290/452)
+2025-09-20T17:57:09.9053068Z Resolving deltas:  65% (294/452)
+2025-09-20T17:57:09.9055310Z Resolving deltas:  66% (299/452)
+2025-09-20T17:57:09.9055985Z Resolving deltas:  67% (303/452)
+2025-09-20T17:57:09.9056843Z Resolving deltas:  68% (308/452)
+2025-09-20T17:57:09.9058209Z Resolving deltas:  69% (312/452)
+2025-09-20T17:57:09.9058595Z Resolving deltas:  70% (317/452)
+2025-09-20T17:57:09.9062036Z Resolving deltas:  71% (321/452)
+2025-09-20T17:57:09.9062554Z Resolving deltas:  72% (326/452)
+2025-09-20T17:57:09.9063600Z Resolving deltas:  73% (330/452)
+2025-09-20T17:57:09.9065988Z Resolving deltas:  74% (335/452)
+2025-09-20T17:57:09.9070488Z Resolving deltas:  75% (339/452)
+2025-09-20T17:57:09.9074788Z Resolving deltas:  76% (344/452)
+2025-09-20T17:57:09.9075856Z Resolving deltas:  77% (349/452)
+2025-09-20T17:57:09.9076270Z Resolving deltas:  78% (353/452)
+2025-09-20T17:57:09.9076631Z Resolving deltas:  79% (358/452)
+2025-09-20T17:57:09.9078187Z Resolving deltas:  80% (362/452)
+2025-09-20T17:57:09.9082366Z Resolving deltas:  81% (367/452)
+2025-09-20T17:57:09.9083764Z Resolving deltas:  82% (371/452)
+2025-09-20T17:57:09.9085812Z Resolving deltas:  83% (376/452)
+2025-09-20T17:57:09.9087512Z Resolving deltas:  84% (380/452)
+2025-09-20T17:57:09.9089998Z Resolving deltas:  85% (385/452)
+2025-09-20T17:57:09.9090458Z Resolving deltas:  86% (389/452)
+2025-09-20T17:57:09.9096225Z Resolving deltas:  87% (394/452)
+2025-09-20T17:57:09.9104327Z Resolving deltas:  88% (398/452)
+2025-09-20T17:57:09.9120180Z Resolving deltas:  89% (403/452)
+2025-09-20T17:57:09.9120572Z Resolving deltas:  90% (408/452)
+2025-09-20T17:57:09.9120934Z Resolving deltas:  91% (412/452)
+2025-09-20T17:57:09.9129321Z Resolving deltas:  92% (416/452)
+2025-09-20T17:57:09.9129970Z Resolving deltas:  93% (421/452)
+2025-09-20T17:57:09.9132579Z Resolving deltas:  94% (426/452)
+2025-09-20T17:57:09.9133861Z Resolving deltas:  95% (430/452)
+2025-09-20T17:57:09.9137567Z Resolving deltas:  96% (434/452)
+2025-09-20T17:57:09.9138792Z Resolving deltas:  97% (439/452)
+2025-09-20T17:57:09.9142629Z Resolving deltas:  98% (443/452)
+2025-09-20T17:57:09.9153672Z Resolving deltas:  99% (448/452)
+2025-09-20T17:57:09.9154540Z Resolving deltas: 100% (452/452)
+2025-09-20T17:57:09.9155151Z Resolving deltas: 100% (452/452), done.
+2025-09-20T17:57:09.9358614Z From https://github.com/Yrcd27/QA-and-Testing-for-Mirror
+2025-09-20T17:57:09.9359409Z  * [new ref]         edd03d7eb150faab181687f942236f37effc0737 -> origin/main
+2025-09-20T17:57:09.9396293Z ##[endgroup]
+2025-09-20T17:57:09.9397090Z ##[group]Determining the checkout info
+2025-09-20T17:57:09.9398989Z ##[endgroup]
+2025-09-20T17:57:09.9399523Z ##[group]Checking out the ref
+2025-09-20T17:57:09.9403662Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2025-09-20T17:57:10.3769212Z Switched to a new branch 'main'
+2025-09-20T17:57:10.3770808Z branch 'main' set up to track 'origin/main'.
+2025-09-20T17:57:10.3796535Z ##[endgroup]
+2025-09-20T17:57:10.3839515Z [command]/usr/bin/git log -1 --format='%H'
+2025-09-20T17:57:10.3864286Z 'edd03d7eb150faab181687f942236f37effc0737'
+2025-09-20T17:57:10.4083839Z ##[group]Run actions/setup-node@v3
+2025-09-20T17:57:10.4084128Z with:
+2025-09-20T17:57:10.4084302Z   node-version: 18.x
+2025-09-20T17:57:10.4084496Z   cache: npm
+2025-09-20T17:57:10.4084667Z   always-auth: false
+2025-09-20T17:57:10.4084855Z   check-latest: false
+2025-09-20T17:57:10.4085165Z   token: ***
+2025-09-20T17:57:10.4085337Z ##[endgroup]
+2025-09-20T17:57:10.6132205Z Found in cache @ /opt/hostedtoolcache/node/18.20.8/x64
+2025-09-20T17:57:10.6139093Z ##[group]Environment details
+2025-09-20T17:57:12.8544204Z node: v18.20.8
+2025-09-20T17:57:12.8544561Z npm: 10.8.2
+2025-09-20T17:57:12.8544829Z yarn: 1.22.22
+2025-09-20T17:57:12.8545745Z ##[endgroup]
+2025-09-20T17:57:12.8561255Z [command]/opt/hostedtoolcache/node/18.20.8/x64/bin/npm config get cache
+2025-09-20T17:57:13.1963677Z /home/runner/.npm
+2025-09-20T17:57:13.3626987Z Cache hit for: node-cache-Linux-npm-bd42ca2bb42da82ab0533556244ceb5e1b06051cd1df7c133feb786626601218
+2025-09-20T17:57:14.2022559Z Received 73146295 of 73146295 (100.0%), 95.2 MBs/sec
+2025-09-20T17:57:14.2052375Z Cache Size: ~70 MB (73146295 B)
+2025-09-20T17:57:14.2150789Z [command]/usr/bin/tar -xf /home/runner/work/_temp/16449179-93b2-465f-83db-6f87de117335/cache.tzst -P -C /home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror --use-compress-program unzstd
+2025-09-20T17:57:14.5519985Z Cache restored successfully
+2025-09-20T17:57:14.5675674Z Cache restored from key: node-cache-Linux-npm-bd42ca2bb42da82ab0533556244ceb5e1b06051cd1df7c133feb786626601218
+2025-09-20T17:57:14.5835786Z ##[group]Run npm install
+2025-09-20T17:57:14.5836080Z [36;1mnpm install[0m
+2025-09-20T17:57:14.5975469Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:14.5975850Z ##[endgroup]
+2025-09-20T17:57:18.3830830Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:57:18.3831983Z npm warn EBADENGINE   package: 'react-router@7.7.1',
+2025-09-20T17:57:18.3832772Z npm warn EBADENGINE   required: { node: '>=20.0.0' },
+2025-09-20T17:57:18.3833572Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:57:18.3834181Z npm warn EBADENGINE }
+2025-09-20T17:57:18.3834653Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:57:18.3835300Z npm warn EBADENGINE   package: 'react-router-dom@7.7.1',
+2025-09-20T17:57:18.3835960Z npm warn EBADENGINE   required: { node: '>=20.0.0' },
+2025-09-20T17:57:18.3836705Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:57:18.3837297Z npm warn EBADENGINE }
+2025-09-20T17:57:18.8310681Z 
+2025-09-20T17:57:18.8311856Z up to date, audited 8 packages in 4s
+2025-09-20T17:57:18.8322583Z 
+2025-09-20T17:57:18.8322899Z found 0 vulnerabilities
+2025-09-20T17:57:18.8454727Z ##[group]Run npm install
+2025-09-20T17:57:18.8455035Z [36;1mnpm install[0m
+2025-09-20T17:57:18.8485861Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:18.8486116Z ##[endgroup]
+2025-09-20T17:57:20.0565800Z 
+2025-09-20T17:57:20.0566728Z added 144 packages, and audited 145 packages in 1s
+2025-09-20T17:57:20.0567207Z 
+2025-09-20T17:57:20.0567494Z 21 packages are looking for funding
+2025-09-20T17:57:20.0568030Z   run `npm fund` for details
+2025-09-20T17:57:20.0577078Z 
+2025-09-20T17:57:20.0577475Z found 0 vulnerabilities
+2025-09-20T17:57:20.0735318Z ##[group]Run node --check server.js
+2025-09-20T17:57:20.0735669Z [36;1mnode --check server.js[0m
+2025-09-20T17:57:20.0768226Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:20.0768509Z ##[endgroup]
+2025-09-20T17:57:20.1176644Z ##[group]Run cp .github/workflows/.env.ci mirror-backend/.env
+2025-09-20T17:57:20.1177138Z [36;1mcp .github/workflows/.env.ci mirror-backend/.env[0m
+2025-09-20T17:57:20.1207469Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:20.1207736Z ##[endgroup]
+2025-09-20T17:57:20.1306566Z ##[group]Run npm install
+2025-09-20T17:57:20.1306828Z [36;1mnpm install[0m
+2025-09-20T17:57:20.1337000Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:20.1337269Z ##[endgroup]
+2025-09-20T17:57:20.6360455Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:57:20.6361739Z npm warn EBADENGINE   package: 'react-router@7.9.1',
+2025-09-20T17:57:20.6362390Z npm warn EBADENGINE   required: { node: '>=20.0.0' },
+2025-09-20T17:57:20.6363045Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:57:20.6363737Z npm warn EBADENGINE }
+2025-09-20T17:57:20.6366029Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:57:20.6366992Z npm warn EBADENGINE   package: 'react-router-dom@7.9.1',
+2025-09-20T17:57:20.6367802Z npm warn EBADENGINE   required: { node: '>=20.0.0' },
+2025-09-20T17:57:20.6368591Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:57:20.6369258Z npm warn EBADENGINE }
+2025-09-20T17:57:20.6375179Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:57:20.6376023Z npm warn EBADENGINE   package: 'vite@7.1.6',
+2025-09-20T17:57:20.6376465Z npm warn EBADENGINE   required: { node: '^20.19.0 || >=22.12.0' },
+2025-09-20T17:57:20.6376937Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:57:20.6377262Z npm warn EBADENGINE }
+2025-09-20T17:57:22.9186077Z 
+2025-09-20T17:57:22.9187203Z added 212 packages, and audited 213 packages in 3s
+2025-09-20T17:57:22.9189188Z 
+2025-09-20T17:57:22.9189539Z 43 packages are looking for funding
+2025-09-20T17:57:22.9190029Z   run `npm fund` for details
+2025-09-20T17:57:22.9199947Z 
+2025-09-20T17:57:22.9200320Z found 0 vulnerabilities
+2025-09-20T17:57:22.9523665Z ##[group]Run npm run build
+2025-09-20T17:57:22.9524124Z [36;1mnpm run build[0m
+2025-09-20T17:57:22.9574486Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:22.9574921Z ##[endgroup]
+2025-09-20T17:57:23.1031993Z 
+2025-09-20T17:57:23.1032586Z > mirror-frontend@0.0.0 build
+2025-09-20T17:57:23.1033271Z > node "./node_modules/vite/bin/vite.js" build
+2025-09-20T17:57:23.1033665Z 
+2025-09-20T17:57:23.1519292Z [33mYou are using Node.js 18.20.8. Vite requires Node.js version 20.19+ or 22.12+. Please upgrade your Node.js version.[39m
+2025-09-20T17:57:23.9083004Z [36mvite v7.1.6 [32mbuilding for production...[36m[39m
+2025-09-20T17:57:23.9693064Z [32m✓[39m 0 modules transformed.
+2025-09-20T17:57:23.9717009Z [31m✗[39m Build failed in 32ms
+2025-09-20T17:57:23.9717967Z [31merror during build:
+2025-09-20T17:57:23.9719013Z [31m[vite:build-html] crypto.hash is not a function[31m
+2025-09-20T17:57:23.9720430Z file: [36m/home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/index.html[31m
+2025-09-20T17:57:23.9722866Z     at getHash (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:2621:21)
+2025-09-20T17:57:23.9725617Z     at file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26646:22
+2025-09-20T17:57:23.9728412Z     at traverseNodes (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26416:2)
+2025-09-20T17:57:23.9730453Z     at file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26417:141
+2025-09-20T17:57:23.9731797Z     at Array.forEach (<anonymous>)
+2025-09-20T17:57:23.9733171Z     at traverseNodes (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26417:118)
+2025-09-20T17:57:23.9735141Z     at file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26417:141
+2025-09-20T17:57:23.9736162Z     at Array.forEach (<anonymous>)
+2025-09-20T17:57:23.9737428Z     at traverseNodes (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26417:118)
+2025-09-20T17:57:23.9739462Z     at file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26417:141[39m
+2025-09-20T17:57:23.9914714Z ##[error]Process completed with exit code 1.
+2025-09-20T17:57:23.9966653Z ##[group]Run nohup node server.js &
+2025-09-20T17:57:23.9966979Z [36;1mnohup node server.js &[0m
+2025-09-20T17:57:23.9967223Z [36;1mecho $! > backend.pid[0m
+2025-09-20T17:57:23.9967503Z [36;1msleep 10  # Give the server more time to start up[0m
+2025-09-20T17:57:23.9997612Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:23.9997852Z env:
+2025-09-20T17:57:23.9998078Z   MONGO_URI: mongodb://localhost:27017/mirror
+2025-09-20T17:57:23.9998374Z   JWT_SECRET: test-jwt-secret
+2025-09-20T17:57:23.9998599Z   PORT: 3000
+2025-09-20T17:57:23.9998770Z ##[endgroup]
+2025-09-20T17:57:24.3246821Z [dotenv@17.2.1] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+2025-09-20T17:57:24.4199651Z MongoDB connected
+2025-09-20T17:57:24.4228136Z Server running on port 3000
+2025-09-20T17:57:39.0114477Z ##[group]Run npm install
+2025-09-20T17:57:39.0114739Z [36;1mnpm install[0m
+2025-09-20T17:57:39.0144869Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:39.0145111Z ##[endgroup]
+2025-09-20T17:57:46.2297330Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2025-09-20T17:57:46.2904729Z npm warn deprecated supertest@6.3.4: Please upgrade to supertest v7.1.3+, see release notes at https://github.com/forwardemail/supertest/releases/tag/v7.1.3 - maintenance is supported by Forward Email @ https://forwardemail.net
+2025-09-20T17:57:46.3347556Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2025-09-20T17:57:46.5153797Z npm warn deprecated superagent@8.1.2: Please upgrade to superagent v10.2.2+, see release notes at https://github.com/forwardemail/superagent/releases/tag/v10.2.2 - maintenance is supported by Forward Email @ https://forwardemail.net
+2025-09-20T17:57:47.0035578Z 
+2025-09-20T17:57:47.0036349Z added 304 packages, and audited 305 packages in 8s
+2025-09-20T17:57:47.0039571Z 
+2025-09-20T17:57:47.0039953Z 46 packages are looking for funding
+2025-09-20T17:57:47.0040514Z   run `npm fund` for details
+2025-09-20T17:57:47.0050883Z 
+2025-09-20T17:57:47.0051160Z found 0 vulnerabilities
+2025-09-20T17:57:47.0357016Z ##[group]Run npm test
+2025-09-20T17:57:47.0357383Z [36;1mnpm test[0m
+2025-09-20T17:57:47.0388321Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:47.0388557Z env:
+2025-09-20T17:57:47.0388762Z   API_BASE_URL: http://localhost:3000
+2025-09-20T17:57:47.0389006Z ##[endgroup]
+2025-09-20T17:57:47.2023952Z 
+2025-09-20T17:57:47.2024809Z > mirror-unit-tests@1.0.0 test
+2025-09-20T17:57:47.2026826Z > node ./run-tests.js
+2025-09-20T17:57:47.2027788Z 
+2025-09-20T17:57:47.2351570Z 
+2025-09-20T17:57:47.2352168Z === Running Registration Tests First ===
+2025-09-20T17:57:47.2352481Z 
+2025-09-20T17:57:48.1020456Z   console.log
+2025-09-20T17:57:48.1021118Z     Using test user for registration: {
+2025-09-20T17:57:48.1023250Z       Name: 'TestUser_1758391068076',
+2025-09-20T17:57:48.1023945Z       email: 'testuser_1758391068076@example.com',
+2025-09-20T17:57:48.1024578Z       passwordLength: 17
+2025-09-20T17:57:48.1025338Z     }
+2025-09-20T17:57:48.1026050Z 
+2025-09-20T17:57:48.1026662Z       at Object.log (auth/registration.test.js:8:13)
+2025-09-20T17:57:48.1026953Z 
+2025-09-20T17:57:48.1048819Z   console.log
+2025-09-20T17:57:48.1050210Z     Making registration request to: { baseUrl: 'http://localhost:3000', path: '/api/auth/signup' }
+2025-09-20T17:57:48.1050805Z 
+2025-09-20T17:57:48.1051349Z       at Object.log (auth/registration.test.js:19:13)
+2025-09-20T17:57:48.1051802Z 
+2025-09-20T17:57:48.2418105Z   console.log
+2025-09-20T17:57:48.2418902Z     Registration response status: 201
+2025-09-20T17:57:48.2419461Z 
+2025-09-20T17:57:48.2419922Z       at Object.log (auth/registration.test.js:27:13)
+2025-09-20T17:57:48.2420157Z 
+2025-09-20T17:57:48.2426709Z   console.log
+2025-09-20T17:57:48.2427593Z     Registration response body: { message: 'User registered successfully' }
+2025-09-20T17:57:48.2428064Z 
+2025-09-20T17:57:48.2428506Z       at Object.log (auth/registration.test.js:28:13)
+2025-09-20T17:57:48.2428726Z 
+2025-09-20T17:57:48.2601885Z PASS auth/registration.test.js
+2025-09-20T17:57:48.2603570Z   User Registration Tests
+2025-09-20T17:57:48.2607078Z     ✓ Should register a new user successfully (142 ms)
+2025-09-20T17:57:48.2607809Z     ✓ Should fail registration when fields are missing (4 ms)
+2025-09-20T17:57:48.2608533Z     ✓ Should fail registration with short password (3 ms)
+2025-09-20T17:57:48.2609253Z     ✓ Should fail registration with existing email (6 ms)
+2025-09-20T17:57:48.2609987Z 
+2025-09-20T17:57:48.2629599Z Test Suites: 1 passed, 1 total
+2025-09-20T17:57:48.2630144Z Tests:       4 passed, 4 total
+2025-09-20T17:57:48.2630653Z Snapshots:   0 total
+2025-09-20T17:57:48.2631333Z Time:        0.659 s
+2025-09-20T17:57:48.2632489Z Ran all test suites matching /auth\/registration.test.js/i.
+2025-09-20T17:57:48.3732039Z 
+2025-09-20T17:57:48.3732644Z === Running Login Tests Second ===
+2025-09-20T17:57:48.3732974Z 
+2025-09-20T17:57:49.1888172Z   console.log
+2025-09-20T17:57:49.1888862Z     Using test user for login: {
+2025-09-20T17:57:49.1889415Z       Name: 'TestUser_1758391069170',
+2025-09-20T17:57:49.1890063Z       email: 'testuser_1758391069170@example.com',
+2025-09-20T17:57:49.1890662Z       passwordLength: 17
+2025-09-20T17:57:49.1891115Z     }
+2025-09-20T17:57:49.1891370Z 
+2025-09-20T17:57:49.1891958Z       at Object.log (auth/login.test.js:8:13)
+2025-09-20T17:57:49.1892285Z 
+2025-09-20T17:57:49.1902876Z   console.log
+2025-09-20T17:57:49.1903463Z     Registering user before login tests...
+2025-09-20T17:57:49.1903902Z 
+2025-09-20T17:57:49.1904198Z       at Object.log (auth/login.test.js:15:13)
+2025-09-20T17:57:49.1904518Z 
+2025-09-20T17:57:49.1916674Z   console.log
+2025-09-20T17:57:49.1917625Z     Making pre-registration request to: { baseUrl: 'http://localhost:3000', path: '/api/auth/signup' }
+2025-09-20T17:57:49.1918390Z 
+2025-09-20T17:57:49.1918681Z       at Object.log (auth/login.test.js:24:15)
+2025-09-20T17:57:49.1919021Z 
+2025-09-20T17:57:49.2959459Z   console.log
+2025-09-20T17:57:49.2959970Z     Pre-registration status: 201
+2025-09-20T17:57:49.2960273Z 
+2025-09-20T17:57:49.2961073Z       at Object.log (auth/login.test.js:31:15)
+2025-09-20T17:57:49.2961654Z 
+2025-09-20T17:57:49.2967415Z   console.log
+2025-09-20T17:57:49.2968048Z     Pre-registration response: { message: 'User registered successfully' }
+2025-09-20T17:57:49.2968530Z 
+2025-09-20T17:57:49.2968763Z       at Object.log (auth/login.test.js:32:15)
+2025-09-20T17:57:49.2969084Z 
+2025-09-20T17:57:49.2988324Z   console.log
+2025-09-20T17:57:49.2988911Z     Attempting login with: { email: 'testuser_1758391069170@example.com' }
+2025-09-20T17:57:49.2989371Z 
+2025-09-20T17:57:49.2989612Z       at Object.log (auth/login.test.js:47:13)
+2025-09-20T17:57:49.2989947Z 
+2025-09-20T17:57:49.2998930Z   console.log
+2025-09-20T17:57:49.2999621Z     Making login request to: { baseUrl: 'http://localhost:3000', path: '/api/auth/login' }
+2025-09-20T17:57:49.3000134Z 
+2025-09-20T17:57:49.3000371Z       at Object.log (auth/login.test.js:51:13)
+2025-09-20T17:57:49.3000685Z 
+2025-09-20T17:57:49.3932583Z   console.log
+2025-09-20T17:57:49.3933134Z     Login response status: 200
+2025-09-20T17:57:49.3933466Z 
+2025-09-20T17:57:49.3933718Z       at Object.log (auth/login.test.js:59:13)
+2025-09-20T17:57:49.3934055Z 
+2025-09-20T17:57:49.3940454Z   console.log
+2025-09-20T17:57:49.3940838Z     Login response body: {
+2025-09-20T17:57:49.3941314Z       message: 'Login successful',
+2025-09-20T17:57:49.3945062Z       token: '***',
+2025-09-20T17:57:49.3945474Z       user: {
+2025-09-20T17:57:49.3945842Z         id: '68ceeb1d706eb0133a5d4785',
+2025-09-20T17:57:49.3946335Z         name: 'TestUser_1758391069170',
+2025-09-20T17:57:49.3946854Z         email: 'testuser_1758391069170@example.com'
+2025-09-20T17:57:49.3947279Z       }
+2025-09-20T17:57:49.3947542Z     }
+2025-09-20T17:57:49.3947694Z 
+2025-09-20T17:57:49.3947933Z       at Object.log (auth/login.test.js:60:13)
+2025-09-20T17:57:49.3948250Z 
+2025-09-20T17:57:49.6023049Z   console.log
+2025-09-20T17:57:49.6024003Z     Second user registration response: { message: 'User registered successfully' }
+2025-09-20T17:57:49.6024738Z 
+2025-09-20T17:57:49.6025076Z       at Object.log (auth/login.test.js:143:13)
+2025-09-20T17:57:49.6025484Z 
+2025-09-20T17:57:49.6942484Z   console.log
+2025-09-20T17:57:49.6942925Z     Second user login response: {
+2025-09-20T17:57:49.6943322Z       message: 'Login successful',
+2025-09-20T17:57:49.6945174Z       token: '***',
+2025-09-20T17:57:49.6945463Z       user: {
+2025-09-20T17:57:49.6946243Z         id: '68ceeb1d706eb0133a5d478b',
+2025-09-20T17:57:49.6946646Z         name: 'AnotherUser_1758391069170',
+2025-09-20T17:57:49.6947120Z         email: 'anotheruser_1758391069170@example.com'
+2025-09-20T17:57:49.6947415Z       }
+2025-09-20T17:57:49.6947579Z     }
+2025-09-20T17:57:49.6947683Z 
+2025-09-20T17:57:49.6947826Z       at Object.log (auth/login.test.js:159:13)
+2025-09-20T17:57:49.6948032Z 
+2025-09-20T17:57:49.6987235Z PASS auth/login.test.js
+2025-09-20T17:57:49.6989950Z   User Login Tests
+2025-09-20T17:57:49.6993416Z     ✓ Should login successfully with valid credentials (100 ms)
+2025-09-20T17:57:49.6994392Z     ✓ Should fail login when fields are missing (11 ms)
+2025-09-20T17:57:49.6995410Z     ✓ Should fail login with non-existent email (10 ms)
+2025-09-20T17:57:49.6996306Z     ✓ Should fail login with incorrect password (90 ms)
+2025-09-20T17:57:49.6997140Z     ✓ Should register and login another user successfully (186 ms)
+2025-09-20T17:57:49.7001966Z 
+2025-09-20T17:57:49.7023635Z Test Suites: 1 passed, 1 total
+2025-09-20T17:57:49.7024276Z Tests:       5 passed, 5 total
+2025-09-20T17:57:49.7024776Z Snapshots:   0 total
+2025-09-20T17:57:49.7025397Z Time:        0.992 s
+2025-09-20T17:57:49.7026069Z Ran all test suites matching /auth\/login.test.js/i.
+2025-09-20T17:57:49.8109061Z 
+2025-09-20T17:57:49.8109747Z === All tests completed ===
+2025-09-20T17:57:49.8110192Z 
+2025-09-20T17:57:49.8263369Z ##[group]Run npm install
+2025-09-20T17:57:49.8263633Z [36;1mnpm install[0m
+2025-09-20T17:57:49.8293553Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:49.8293792Z ##[endgroup]
+2025-09-20T17:57:50.2964200Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:57:50.2965360Z npm warn EBADENGINE   package: 'chromedriver@140.0.3',
+2025-09-20T17:57:50.2966658Z npm warn EBADENGINE   required: { node: '>=20' },
+2025-09-20T17:57:50.2967789Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:57:50.2968364Z npm warn EBADENGINE }
+2025-09-20T17:57:50.2989053Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:57:50.2989901Z npm warn EBADENGINE   package: 'selenium-webdriver@4.35.0',
+2025-09-20T17:57:50.2990771Z npm warn EBADENGINE   required: { node: '>= 20.0.0' },
+2025-09-20T17:57:50.2991859Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:57:50.2992583Z npm warn EBADENGINE }
+2025-09-20T17:57:50.7946913Z 
+2025-09-20T17:57:50.7947671Z up to date, audited 248 packages in 893ms
+2025-09-20T17:57:50.7948055Z 
+2025-09-20T17:57:50.7948607Z 31 packages are looking for funding
+2025-09-20T17:57:50.7949175Z   run `npm fund` for details
+2025-09-20T17:57:50.7999420Z 
+2025-09-20T17:57:50.8000074Z 5 vulnerabilities (3 moderate, 2 critical)
+2025-09-20T17:57:50.8000447Z 
+2025-09-20T17:57:50.8000767Z Some issues need review, and may require choosing
+2025-09-20T17:57:50.8001297Z a different dependency.
+2025-09-20T17:57:50.8001784Z 
+2025-09-20T17:57:50.8001978Z Run `npm audit` for details.
+2025-09-20T17:57:50.8170155Z ##[group]Run browser-actions/setup-chrome@v1
+2025-09-20T17:57:50.8170472Z with:
+2025-09-20T17:57:50.8170654Z   chrome-version: stable
+2025-09-20T17:57:50.8170878Z   install-dependencies: false
+2025-09-20T17:57:50.8171115Z   install-chromedriver: false
+2025-09-20T17:57:50.8171325Z   no-sudo: false
+2025-09-20T17:57:50.8171725Z ##[endgroup]
+2025-09-20T17:57:50.8962562Z Setup chrome stable
+2025-09-20T17:57:50.8973687Z Attempting to download chrome stable...
+2025-09-20T17:57:50.8975289Z Acquiring chrome stable from https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+2025-09-20T17:57:51.8947363Z Installing chrome...
+2025-09-20T17:57:51.8983353Z [command]/usr/bin/ar x /home/runner/work/_temp/2e777de2-deb0-48f4-8c87-e39777aab173
+2025-09-20T17:57:52.1209804Z [command]/usr/bin/tar -xf /tmp/deb-dwUJxO/data.tar.xz --directory /tmp/chrome-GZGb6o --strip-components 4 ./opt/google
+2025-09-20T17:57:59.5930550Z Successfully Installed chromium to /opt/hostedtoolcache/setup-chrome/chromium/stable/x64
+2025-09-20T17:57:59.5939438Z [command]/opt/hostedtoolcache/setup-chrome/chromium/stable/x64/chrome --version
+2025-09-20T17:57:59.9094007Z [0920/175759.908489:WARNING:chrome/app/chrome_main_linux.cc:82] Read channel stable from /opt/hostedtoolcache/setup-chrome/chromium/stable/x64/CHROME_VERSION_EXTRA
+2025-09-20T17:57:59.9095420Z Google Chrome 140.0.7339.185 
+2025-09-20T17:57:59.9834685Z Successfully setup chromium 140.0.7339.185
+2025-09-20T17:57:59.9934726Z ##[group]Run nohup npm run dev &
+2025-09-20T17:57:59.9935022Z [36;1mnohup npm run dev &[0m
+2025-09-20T17:57:59.9935256Z [36;1mecho $! > frontend.pid[0m
+2025-09-20T17:57:59.9935490Z [36;1msleep 10[0m
+2025-09-20T17:57:59.9965876Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:59.9966108Z env:
+2025-09-20T17:57:59.9966310Z   VITE_API_URL: http://localhost:3000
+2025-09-20T17:57:59.9966563Z ##[endgroup]
+2025-09-20T17:58:00.1283445Z 
+2025-09-20T17:58:00.1283925Z > mirror-frontend@0.0.0 dev
+2025-09-20T17:58:00.1284510Z > node "./node_modules/vite/bin/vite.js"
+2025-09-20T17:58:00.1284827Z 
+2025-09-20T17:58:00.1737823Z [33mYou are using Node.js 18.20.8. Vite requires Node.js version 20.19+ or 22.12+. Please upgrade your Node.js version.[39m
+2025-09-20T17:58:00.6088515Z [31merror when starting dev server:
+2025-09-20T17:58:00.6089301Z TypeError: crypto.hash is not a function
+2025-09-20T17:58:00.6090471Z     at getHash (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:2621:21)
+2025-09-20T17:58:00.6092071Z     at getLockfileHash (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:11442:9)
+2025-09-20T17:58:00.6093533Z     at getDepHash (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:11445:23)
+2025-09-20T17:58:00.6095001Z     at initDepsOptimizerMetadata (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:10904:53)
+2025-09-20T17:58:00.6096474Z     at createDepsOptimizer (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:34351:17)
+2025-09-20T17:58:00.6097914Z     at new DevEnvironment (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:35113:109)
+2025-09-20T17:58:00.6099546Z     at Object.defaultCreateClientDevEnvironment [as createEnvironment] (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:35531:9)
+2025-09-20T17:58:00.6101935Z     at _createServer (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:28035:132)
+2025-09-20T17:58:00.6104434Z     at async CAC.<anonymous> (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/cli.js:573:18)[39m
+2025-09-20T17:58:10.0074539Z ##[group]Run # Fix permission issues with the mocha binary
+2025-09-20T17:58:10.0075208Z [36;1m# Fix permission issues with the mocha binary[0m
+2025-09-20T17:58:10.0075728Z [36;1mchmod +x ./node_modules/.bin/mocha[0m
+2025-09-20T17:58:10.0076158Z [36;1mnpm run test:login[0m
+2025-09-20T17:58:10.0119826Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:58:10.0120198Z env:
+2025-09-20T17:58:10.0120499Z   SELENIUM_REMOTE_URL: 
+2025-09-20T17:58:10.0120810Z   SELENIUM_BROWSER: chrome
+2025-09-20T17:58:10.0121174Z   SELENIUM_HEADLESS: true
+2025-09-20T17:58:10.0121785Z   BASE_URL: http://localhost:5173
+2025-09-20T17:58:10.0122212Z   API_URL: http://localhost:3000
+2025-09-20T17:58:10.0122589Z ##[endgroup]
+2025-09-20T17:58:10.1463327Z 
+2025-09-20T17:58:10.1463879Z > mirror-selenium-tests@1.0.0 test:login
+2025-09-20T17:58:10.1464403Z > mocha tests/login.test.js --timeout 30000
+2025-09-20T17:58:10.1464935Z 
+2025-09-20T17:58:10.3132437Z [31mError: No test files found: "tests/login.test.js"[39m
+2025-09-20T17:58:10.3349360Z ##[error]Process completed with exit code 1.
+2025-09-20T17:58:10.3390200Z Post job cleanup.
+2025-09-20T17:58:10.4990546Z Cache hit occurred on the primary key node-cache-Linux-npm-bd42ca2bb42da82ab0533556244ceb5e1b06051cd1df7c133feb786626601218, not saving cache.
+2025-09-20T17:58:10.5108313Z Post job cleanup.
+2025-09-20T17:58:10.5842806Z [command]/usr/bin/git version
+2025-09-20T17:58:10.5878203Z git version 2.51.0
+2025-09-20T17:58:10.5922413Z Temporarily overriding HOME='/home/runner/work/_temp/56ee0b90-584b-49e4-b9fc-ba440357eb1a' before making global git config changes
+2025-09-20T17:58:10.5923376Z Adding repository directory to the temporary git global config as a safe directory
+2025-09-20T17:58:10.5926729Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror
+2025-09-20T17:58:10.5961049Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-09-20T17:58:10.5997059Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-09-20T17:58:10.6232775Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-09-20T17:58:10.6254480Z http.https://github.com/.extraheader
+2025-09-20T17:58:10.6266468Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2025-09-20T17:58:10.6301024Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-09-20T17:58:10.6619400Z Print service container logs: ecf87f42281f49159ff7a1368afcf860_mongo44_23dae1
+2025-09-20T17:58:10.6624311Z ##[command]/usr/bin/docker logs --details b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:58:10.6762354Z  {"t":{"$date":"2025-09-20T17:56:55.095+00:00"},"s":"I",  "c":"CONTROL",  "id":23285,   "ctx":"main","msg":"Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+2025-09-20T17:58:10.6763751Z  {"t":{"$date":"2025-09-20T17:56:55.097+00:00"},"s":"I",  "c":"NETWORK",  "id":4648601, "ctx":"main","msg":"Implicit TCP FastOpen unavailable. If TCP FastOpen is required, set tcpFastOpenServer, tcpFastOpenClient, and tcpFastOpenQueueSize."}
+2025-09-20T17:58:10.6765129Z  {"t":{"$date":"2025-09-20T17:56:55.097+00:00"},"s":"I",  "c":"STORAGE",  "id":4615611, "ctx":"initandlisten","msg":"MongoDB starting","attr":{"pid":1,"port":27017,"dbPath":"/data/db","architecture":"64-bit","host":"b87663837b56"}}
+2025-09-20T17:58:10.6766866Z  {"t":{"$date":"2025-09-20T17:56:55.097+00:00"},"s":"I",  "c":"CONTROL",  "id":23403,   "ctx":"initandlisten","msg":"Build Info","attr":{"buildInfo":{"version":"4.4.29","gitVersion":"f4dda329a99811c707eb06d05ad023599f9be263","openSSLVersion":"OpenSSL 1.1.1f  31 Mar 2020","modules":[],"allocator":"tcmalloc","environment":{"distmod":"ubuntu2004","distarch":"x86_64","target_arch":"x86_64"}}}}
+2025-09-20T17:58:10.6768436Z  {"t":{"$date":"2025-09-20T17:56:55.097+00:00"},"s":"I",  "c":"CONTROL",  "id":51765,   "ctx":"initandlisten","msg":"Operating System","attr":{"os":{"name":"Ubuntu","version":"20.04"}}}
+2025-09-20T17:58:10.6769388Z  {"t":{"$date":"2025-09-20T17:56:55.097+00:00"},"s":"I",  "c":"CONTROL",  "id":21951,   "ctx":"initandlisten","msg":"Options set by command line","attr":{"options":{"net":{"bindIp":"*"}}}}
+2025-09-20T17:58:10.6770833Z  {"t":{"$date":"2025-09-20T17:56:55.099+00:00"},"s":"I",  "c":"STORAGE",  "id":22297,   "ctx":"initandlisten","msg":"Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem","tags":["startupWarnings"]}
+2025-09-20T17:58:10.6773657Z  {"t":{"$date":"2025-09-20T17:56:55.099+00:00"},"s":"I",  "c":"STORAGE",  "id":22315,   "ctx":"initandlisten","msg":"Opening WiredTiger","attr":{"config":"create,cache_size=7485M,session_max=33000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000,close_scan_interval=10,close_handle_minimum=250),statistics_log=(wait=0),verbose=[recovery_progress,checkpoint_progress,compact_progress],"}}
+2025-09-20T17:58:10.6776121Z  {"t":{"$date":"2025-09-20T17:56:55.310+00:00"},"s":"I",  "c":"STORAGE",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":"[1758391015:310505][1:0x7f85ff694cc0], txn-recover: [WT_VERB_RECOVERY | WT_VERB_RECOVERY_PROGRESS] Set global recovery timestamp: (0, 0)"}}
+2025-09-20T17:58:10.6778312Z  {"t":{"$date":"2025-09-20T17:56:55.310+00:00"},"s":"I",  "c":"STORAGE",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":"[1758391015:310555][1:0x7f85ff694cc0], txn-recover: [WT_VERB_RECOVERY | WT_VERB_RECOVERY_PROGRESS] Set global oldest timestamp: (0, 0)"}}
+2025-09-20T17:58:10.6779361Z  {"t":{"$date":"2025-09-20T17:56:55.314+00:00"},"s":"I",  "c":"STORAGE",  "id":4795906, "ctx":"initandlisten","msg":"WiredTiger opened","attr":{"durationMillis":215}}
+2025-09-20T17:58:10.6780176Z  {"t":{"$date":"2025-09-20T17:56:55.314+00:00"},"s":"I",  "c":"RECOVERY", "id":23987,   "ctx":"initandlisten","msg":"WiredTiger recoveryTimestamp","attr":{"recoveryTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2025-09-20T17:58:10.6780935Z  {"t":{"$date":"2025-09-20T17:56:55.321+00:00"},"s":"I",  "c":"STORAGE",  "id":22262,   "ctx":"initandlisten","msg":"Timestamp monitor starting"}
+2025-09-20T17:58:10.6782312Z  {"t":{"$date":"2025-09-20T17:56:55.324+00:00"},"s":"W",  "c":"CONTROL",  "id":22120,   "ctx":"initandlisten","msg":"Access control is not enabled for the database. Read and write access to data and configuration is unrestricted","tags":["startupWarnings"]}
+2025-09-20T17:58:10.6783476Z  {"t":{"$date":"2025-09-20T17:56:55.324+00:00"},"s":"W",  "c":"CONTROL",  "id":22178,   "ctx":"initandlisten","msg":"/sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'","tags":["startupWarnings"]}
+2025-09-20T17:58:10.6784835Z  {"t":{"$date":"2025-09-20T17:56:55.324+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"initandlisten","msg":"createCollection","attr":{"namespace":"admin.system.version","uuidDisposition":"provided","uuid":{"uuid":{"$uuid":"6564204b-9fb7-43e2-b6dc-1587a465ae04"}},"options":{"uuid":{"$uuid":"6564204b-9fb7-43e2-b6dc-1587a465ae04"}}}}
+2025-09-20T17:58:10.6786231Z  {"t":{"$date":"2025-09-20T17:56:55.332+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"initandlisten","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"admin.system.version","index":"_id_","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2025-09-20T17:58:10.6787236Z  {"t":{"$date":"2025-09-20T17:56:55.332+00:00"},"s":"I",  "c":"COMMAND",  "id":20459,   "ctx":"initandlisten","msg":"Setting featureCompatibilityVersion","attr":{"newVersion":"4.4"}}
+2025-09-20T17:58:10.6787994Z  {"t":{"$date":"2025-09-20T17:56:55.332+00:00"},"s":"I",  "c":"STORAGE",  "id":20536,   "ctx":"initandlisten","msg":"Flow Control is enabled on this deployment"}
+2025-09-20T17:58:10.6789062Z  {"t":{"$date":"2025-09-20T17:56:55.333+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"initandlisten","msg":"createCollection","attr":{"namespace":"local.startup_log","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"f3555eff-41db-47bf-a9e7-d5f84993bc75"}},"options":{"capped":true,"size":10485760}}}
+2025-09-20T17:58:10.6790387Z  {"t":{"$date":"2025-09-20T17:56:55.340+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"initandlisten","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"local.startup_log","index":"_id_","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2025-09-20T17:58:10.6791645Z  {"t":{"$date":"2025-09-20T17:56:55.340+00:00"},"s":"I",  "c":"FTDC",     "id":20625,   "ctx":"initandlisten","msg":"Initializing full-time diagnostic data capture","attr":{"dataDirectory":"/data/db/diagnostic.data"}}
+2025-09-20T17:58:10.6792868Z  {"t":{"$date":"2025-09-20T17:56:55.340+00:00"},"s":"I",  "c":"REPL",     "id":6015317, "ctx":"initandlisten","msg":"Setting new configuration state","attr":{"newState":"ConfigReplicationDisabled","oldState":"ConfigPreStart"}}
+2025-09-20T17:58:10.6794091Z  {"t":{"$date":"2025-09-20T17:56:55.342+00:00"},"s":"I",  "c":"CONTROL",  "id":20712,   "ctx":"LogicalSessionCacheReap","msg":"Sessions collection is not set up; waiting until next sessions reap interval","attr":{"error":"NamespaceNotFound: config.system.sessions does not exist"}}
+2025-09-20T17:58:10.6795507Z  {"t":{"$date":"2025-09-20T17:56:55.342+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"LogicalSessionCacheRefresh","msg":"createCollection","attr":{"namespace":"config.system.sessions","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"6889a832-afda-4d73-829a-bf5dfbe39592"}},"options":{}}}
+2025-09-20T17:58:10.6796582Z  {"t":{"$date":"2025-09-20T17:56:55.342+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"/tmp/mongodb-27017.sock"}}
+2025-09-20T17:58:10.6797243Z  {"t":{"$date":"2025-09-20T17:56:55.342+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"0.0.0.0"}}
+2025-09-20T17:58:10.6797930Z  {"t":{"$date":"2025-09-20T17:56:55.342+00:00"},"s":"I",  "c":"NETWORK",  "id":23016,   "ctx":"listener","msg":"Waiting for connections","attr":{"port":27017,"ssl":"off"}}
+2025-09-20T17:58:10.6799124Z  {"t":{"$date":"2025-09-20T17:56:55.350+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"LogicalSessionCacheRefresh","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"config.system.sessions","index":"_id_","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2025-09-20T17:58:10.6800493Z  {"t":{"$date":"2025-09-20T17:56:55.350+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"LogicalSessionCacheRefresh","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"config.system.sessions","index":"lsidTTLIndex","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2025-09-20T17:58:10.6801823Z  {"t":{"$date":"2025-09-20T17:57:05.147+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:55636","connectionId":1,"connectionCount":1}}
+2025-09-20T17:58:10.6803062Z  {"t":{"$date":"2025-09-20T17:57:05.147+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn1","msg":"client metadata","attr":{"remote":"127.0.0.1:55636","client":"conn1","doc":{"application":{"name":"MongoDB Shell"},"driver":{"name":"MongoDB Internal Client","version":"4.4.29"},"os":{"type":"Linux","name":"Ubuntu","architecture":"x86_64","version":"20.04"}}}}
+2025-09-20T17:58:10.6804264Z  {"t":{"$date":"2025-09-20T17:57:05.151+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn1","msg":"Connection ended","attr":{"remote":"127.0.0.1:55636","connectionId":1,"connectionCount":0}}
+2025-09-20T17:58:10.6805107Z  {"t":{"$date":"2025-09-20T17:57:15.244+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:45324","connectionId":2,"connectionCount":1}}
+2025-09-20T17:58:10.6806328Z  {"t":{"$date":"2025-09-20T17:57:15.244+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn2","msg":"client metadata","attr":{"remote":"127.0.0.1:45324","client":"conn2","doc":{"application":{"name":"MongoDB Shell"},"driver":{"name":"MongoDB Internal Client","version":"4.4.29"},"os":{"type":"Linux","name":"Ubuntu","architecture":"x86_64","version":"20.04"}}}}
+2025-09-20T17:58:10.6807526Z  {"t":{"$date":"2025-09-20T17:57:15.247+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn2","msg":"Connection ended","attr":{"remote":"127.0.0.1:45324","connectionId":2,"connectionCount":0}}
+2025-09-20T17:58:10.6808361Z  {"t":{"$date":"2025-09-20T17:57:24.404+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.18.0.1:59636","connectionId":3,"connectionCount":1}}
+2025-09-20T17:58:10.6809698Z  {"t":{"$date":"2025-09-20T17:57:24.413+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn3","msg":"client metadata","attr":{"remote":"172.18.0.1:59636","client":"conn3","doc":{"driver":{"name":"nodejs|Mongoose","version":"6.18.0|8.17.0"},"platform":"Node.js v18.20.8, LE","os":{"name":"linux","architecture":"x64","version":"6.11.0-1018-azure","type":"Linux"}}}}
+2025-09-20T17:58:10.6810889Z  {"t":{"$date":"2025-09-20T17:57:24.427+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.18.0.1:59644","connectionId":4,"connectionCount":2}}
+2025-09-20T17:58:10.6812086Z  {"t":{"$date":"2025-09-20T17:57:24.427+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.18.0.1:59658","connectionId":5,"connectionCount":3}}
+2025-09-20T17:58:10.6813306Z  {"t":{"$date":"2025-09-20T17:57:24.431+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn4","msg":"client metadata","attr":{"remote":"172.18.0.1:59644","client":"conn4","doc":{"driver":{"name":"nodejs|Mongoose","version":"6.18.0|8.17.0"},"platform":"Node.js v18.20.8, LE","os":{"name":"linux","architecture":"x64","version":"6.11.0-1018-azure","type":"Linux"}}}}
+2025-09-20T17:58:10.6814834Z  {"t":{"$date":"2025-09-20T17:57:24.431+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn5","msg":"client metadata","attr":{"remote":"172.18.0.1:59658","client":"conn5","doc":{"driver":{"name":"nodejs|Mongoose","version":"6.18.0|8.17.0"},"platform":"Node.js v18.20.8, LE","os":{"name":"linux","architecture":"x64","version":"6.11.0-1018-azure","type":"Linux"}}}}
+2025-09-20T17:58:10.6816342Z  {"t":{"$date":"2025-09-20T17:57:24.433+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"conn4","msg":"createCollection","attr":{"namespace":"mirror.users","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"79dd5c21-5e40-41ac-b1e7-1084a94ae88f"}},"options":{}}}
+2025-09-20T17:58:10.6817584Z  {"t":{"$date":"2025-09-20T17:57:24.434+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"conn5","msg":"createCollection","attr":{"namespace":"mirror.journals","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"af019597-35ba-4710-b0b3-27cc71a3d000"}},"options":{}}}
+2025-09-20T17:58:10.6818636Z  {"t":{"$date":"2025-09-20T17:57:24.435+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.18.0.1:59672","connectionId":6,"connectionCount":4}}
+2025-09-20T17:58:10.6819837Z  {"t":{"$date":"2025-09-20T17:57:24.435+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn6","msg":"client metadata","attr":{"remote":"172.18.0.1:59672","client":"conn6","doc":{"driver":{"name":"nodejs|Mongoose","version":"6.18.0|8.17.0"},"platform":"Node.js v18.20.8, LE","os":{"name":"linux","architecture":"x64","version":"6.11.0-1018-azure","type":"Linux"}}}}
+2025-09-20T17:58:10.6821253Z  {"t":{"$date":"2025-09-20T17:57:24.437+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"conn6","msg":"createCollection","attr":{"namespace":"mirror.userprofiles","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"9305a990-5788-43ea-ac32-a74f966f7158"}},"options":{}}}
+2025-09-20T17:58:10.6822652Z  {"t":{"$date":"2025-09-20T17:57:24.458+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn4","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"mirror.users","index":"_id_","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2025-09-20T17:58:10.6823749Z  {"t":{"$date":"2025-09-20T17:57:24.460+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn5","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"mirror.journals","index":"_id_","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2025-09-20T17:58:10.6824874Z  {"t":{"$date":"2025-09-20T17:57:24.463+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn6","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"mirror.userprofiles","index":"_id_","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2025-09-20T17:58:10.6826412Z  {"t":{"$date":"2025-09-20T17:57:24.463+00:00"},"s":"I",  "c":"INDEX",    "id":20438,   "ctx":"conn4","msg":"Index build: registering","attr":{"buildUUID":{"uuid":{"$uuid":"4859b647-d9c3-4b86-8cc2-881534c798a3"}},"namespace":"mirror.users","collectionUUID":{"uuid":{"$uuid":"79dd5c21-5e40-41ac-b1e7-1084a94ae88f"}},"indexes":1,"firstIndex":{"name":"email_1"}}}
+2025-09-20T17:58:10.6828115Z  {"t":{"$date":"2025-09-20T17:57:24.465+00:00"},"s":"I",  "c":"INDEX",    "id":20438,   "ctx":"conn6","msg":"Index build: registering","attr":{"buildUUID":{"uuid":{"$uuid":"33095d61-98b0-4562-832e-9ef2ed9fcd17"}},"namespace":"mirror.userprofiles","collectionUUID":{"uuid":{"$uuid":"9305a990-5788-43ea-ac32-a74f966f7158"}},"indexes":1,"firstIndex":{"name":"user_id_1"}}}
+2025-09-20T17:58:10.6829534Z  {"t":{"$date":"2025-09-20T17:57:24.465+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn4","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"mirror.users","index":"email_1","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2025-09-20T17:58:10.6830748Z  {"t":{"$date":"2025-09-20T17:57:24.465+00:00"},"s":"I",  "c":"INDEX",    "id":20440,   "ctx":"conn4","msg":"Index build: waiting for index build to complete","attr":{"buildUUID":{"uuid":{"$uuid":"4859b647-d9c3-4b86-8cc2-881534c798a3"}},"deadline":{"$date":{"$numberLong":"9223372036854775807"}}}}
+2025-09-20T17:58:10.6831992Z  {"t":{"$date":"2025-09-20T17:57:24.465+00:00"},"s":"I",  "c":"INDEX",    "id":20447,   "ctx":"conn4","msg":"Index build: completed","attr":{"buildUUID":{"uuid":{"$uuid":"4859b647-d9c3-4b86-8cc2-881534c798a3"}}}}
+2025-09-20T17:58:10.6833109Z  {"t":{"$date":"2025-09-20T17:57:24.473+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn6","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"mirror.userprofiles","index":"user_id_1","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2025-09-20T17:58:10.6834355Z  {"t":{"$date":"2025-09-20T17:57:24.473+00:00"},"s":"I",  "c":"INDEX",    "id":20440,   "ctx":"conn6","msg":"Index build: waiting for index build to complete","attr":{"buildUUID":{"uuid":{"$uuid":"33095d61-98b0-4562-832e-9ef2ed9fcd17"}},"deadline":{"$date":{"$numberLong":"9223372036854775807"}}}}
+2025-09-20T17:58:10.6835439Z  {"t":{"$date":"2025-09-20T17:57:24.473+00:00"},"s":"I",  "c":"INDEX",    "id":20447,   "ctx":"conn6","msg":"Index build: completed","attr":{"buildUUID":{"uuid":{"$uuid":"33095d61-98b0-4562-832e-9ef2ed9fcd17"}}}}
+2025-09-20T17:58:10.6836301Z  {"t":{"$date":"2025-09-20T17:57:25.332+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:42354","connectionId":7,"connectionCount":5}}
+2025-09-20T17:58:10.6837532Z  {"t":{"$date":"2025-09-20T17:57:25.333+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn7","msg":"client metadata","attr":{"remote":"127.0.0.1:42354","client":"conn7","doc":{"application":{"name":"MongoDB Shell"},"driver":{"name":"MongoDB Internal Client","version":"4.4.29"},"os":{"type":"Linux","name":"Ubuntu","architecture":"x86_64","version":"20.04"}}}}
+2025-09-20T17:58:10.6839057Z  {"t":{"$date":"2025-09-20T17:57:25.336+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn7","msg":"Connection ended","attr":{"remote":"127.0.0.1:42354","connectionId":7,"connectionCount":4}}
+2025-09-20T17:58:10.6840009Z  {"t":{"$date":"2025-09-20T17:57:34.920+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.18.0.1:45304","connectionId":8,"connectionCount":5}}
+2025-09-20T17:58:10.6841330Z  {"t":{"$date":"2025-09-20T17:57:34.920+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn8","msg":"client metadata","attr":{"remote":"172.18.0.1:45304","client":"conn8","doc":{"driver":{"name":"nodejs|Mongoose","version":"6.18.0|8.17.0"},"platform":"Node.js v18.20.8, LE","os":{"name":"linux","architecture":"x64","version":"6.11.0-1018-azure","type":"Linux"}}}}
+2025-09-20T17:58:10.6843133Z  {"t":{"$date":"2025-09-20T17:57:35.424+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:49622","connectionId":9,"connectionCount":6}}
+2025-09-20T17:58:10.6844481Z  {"t":{"$date":"2025-09-20T17:57:35.424+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn9","msg":"client metadata","attr":{"remote":"127.0.0.1:49622","client":"conn9","doc":{"application":{"name":"MongoDB Shell"},"driver":{"name":"MongoDB Internal Client","version":"4.4.29"},"os":{"type":"Linux","name":"Ubuntu","architecture":"x86_64","version":"20.04"}}}}
+2025-09-20T17:58:10.6845757Z  {"t":{"$date":"2025-09-20T17:57:35.428+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn9","msg":"Connection ended","attr":{"remote":"127.0.0.1:49622","connectionId":9,"connectionCount":5}}
+2025-09-20T17:58:10.6846793Z  {"t":{"$date":"2025-09-20T17:57:45.524+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:57250","connectionId":10,"connectionCount":6}}
+2025-09-20T17:58:10.6848128Z  {"t":{"$date":"2025-09-20T17:57:45.525+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn10","msg":"client metadata","attr":{"remote":"127.0.0.1:57250","client":"conn10","doc":{"application":{"name":"MongoDB Shell"},"driver":{"name":"MongoDB Internal Client","version":"4.4.29"},"os":{"type":"Linux","name":"Ubuntu","architecture":"x86_64","version":"20.04"}}}}
+2025-09-20T17:58:10.6849445Z  {"t":{"$date":"2025-09-20T17:57:45.531+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn10","msg":"Connection ended","attr":{"remote":"127.0.0.1:57250","connectionId":10,"connectionCount":5}}
+2025-09-20T17:58:10.6862789Z  {"t":{"$date":"2025-09-20T17:57:55.323+00:00"},"s":"I",  "c":"STORAGE",  "id":22430,   "ctx":"WTCheckpointThread","msg":"WiredTiger message","attr":{"message":"[1758391075:323393][1:0x7f85f1685700], WT_SESSION.checkpoint: [WT_VERB_CHECKPOINT_PROGRESS] saving checkpoint snapshot min: 66, snapshot max: 66 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 1"}}
+2025-09-20T17:58:10.6864331Z  {"t":{"$date":"2025-09-20T17:57:55.626+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:33004","connectionId":11,"connectionCount":6}}
+2025-09-20T17:58:10.6865584Z  {"t":{"$date":"2025-09-20T17:57:55.626+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn11","msg":"client metadata","attr":{"remote":"127.0.0.1:33004","client":"conn11","doc":{"application":{"name":"MongoDB Shell"},"driver":{"name":"MongoDB Internal Client","version":"4.4.29"},"os":{"type":"Linux","name":"Ubuntu","architecture":"x86_64","version":"20.04"}}}}
+2025-09-20T17:58:10.6866793Z  {"t":{"$date":"2025-09-20T17:57:55.630+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn11","msg":"Connection ended","attr":{"remote":"127.0.0.1:33004","connectionId":11,"connectionCount":5}}
+2025-09-20T17:58:10.6867624Z  {"t":{"$date":"2025-09-20T17:58:05.720+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:49388","connectionId":12,"connectionCount":6}}
+2025-09-20T17:58:10.6868823Z  {"t":{"$date":"2025-09-20T17:58:05.720+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn12","msg":"client metadata","attr":{"remote":"127.0.0.1:49388","client":"conn12","doc":{"application":{"name":"MongoDB Shell"},"driver":{"name":"MongoDB Internal Client","version":"4.4.29"},"os":{"type":"Linux","name":"Ubuntu","architecture":"x86_64","version":"20.04"}}}}
+2025-09-20T17:58:10.6870001Z  {"t":{"$date":"2025-09-20T17:58:05.723+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn12","msg":"Connection ended","attr":{"remote":"127.0.0.1:49388","connectionId":12,"connectionCount":5}}
+2025-09-20T17:58:10.6877448Z Stop and remove container: ecf87f42281f49159ff7a1368afcf860_mongo44_23dae1
+2025-09-20T17:58:10.6882874Z ##[command]/usr/bin/docker rm --force b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:58:12.2135717Z b87663837b56120a597f944c6e4321489de09670515385c0fdd4896de04c227d
+2025-09-20T17:58:12.2167713Z Remove container network: github_network_a11c0c3be1974e5ea45419bcc9f68b43
+2025-09-20T17:58:12.2172498Z ##[command]/usr/bin/docker network rm github_network_a11c0c3be1974e5ea45419bcc9f68b43
+2025-09-20T17:58:12.3374328Z github_network_a11c0c3be1974e5ea45419bcc9f68b43
+2025-09-20T17:58:12.3434838Z Cleaning up orphan processes
+2025-09-20T17:58:12.3744277Z Terminate orphan process: pid (2600) (node)

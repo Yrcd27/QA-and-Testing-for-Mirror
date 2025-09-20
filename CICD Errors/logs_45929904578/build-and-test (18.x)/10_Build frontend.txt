@@ -1,0 +1,26 @@
+﻿2025-09-20T17:57:22.9523646Z ##[group]Run npm run build
+2025-09-20T17:57:22.9524119Z [36;1mnpm run build[0m
+2025-09-20T17:57:22.9574465Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:57:22.9574917Z ##[endgroup]
+2025-09-20T17:57:23.1031938Z 
+2025-09-20T17:57:23.1032580Z > mirror-frontend@0.0.0 build
+2025-09-20T17:57:23.1033260Z > node "./node_modules/vite/bin/vite.js" build
+2025-09-20T17:57:23.1033659Z 
+2025-09-20T17:57:23.1519247Z [33mYou are using Node.js 18.20.8. Vite requires Node.js version 20.19+ or 22.12+. Please upgrade your Node.js version.[39m
+2025-09-20T17:57:23.9082966Z [36mvite v7.1.6 [32mbuilding for production...[36m[39m
+2025-09-20T17:57:23.9693021Z [32m✓[39m 0 modules transformed.
+2025-09-20T17:57:23.9716989Z [31m✗[39m Build failed in 32ms
+2025-09-20T17:57:23.9717959Z [31merror during build:
+2025-09-20T17:57:23.9719000Z [31m[vite:build-html] crypto.hash is not a function[31m
+2025-09-20T17:57:23.9720326Z file: [36m/home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/index.html[31m
+2025-09-20T17:57:23.9722853Z     at getHash (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:2621:21)
+2025-09-20T17:57:23.9725611Z     at file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26646:22
+2025-09-20T17:57:23.9728406Z     at traverseNodes (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26416:2)
+2025-09-20T17:57:23.9730448Z     at file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26417:141
+2025-09-20T17:57:23.9731791Z     at Array.forEach (<anonymous>)
+2025-09-20T17:57:23.9733153Z     at traverseNodes (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26417:118)
+2025-09-20T17:57:23.9735135Z     at file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26417:141
+2025-09-20T17:57:23.9736156Z     at Array.forEach (<anonymous>)
+2025-09-20T17:57:23.9737420Z     at traverseNodes (file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26417:118)
+2025-09-20T17:57:23.9739453Z     at file:///home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror/mirror-frontend/node_modules/vite/dist/node/chunks/dep-D5b0Zz6C.js:26417:141[39m
+2025-09-20T17:57:23.9914692Z ##[error]Process completed with exit code 1.
