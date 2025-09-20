@@ -1,4 +1,5 @@
-const apiBaseUrl = 'http://localhost:5000/api';
+// Use environment variable API_BASE_URL if available, otherwise fall back to localhost:3000
+const apiBaseUrl = (process.env.API_BASE_URL || 'http://localhost:3000') + '/api';
 
 // Generate unique identifiers for test users using timestamp
 const timestamp = new Date().getTime();

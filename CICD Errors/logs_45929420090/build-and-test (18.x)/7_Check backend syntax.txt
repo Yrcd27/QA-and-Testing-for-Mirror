@@ -1,0 +1,4 @@
+﻿2025-09-20T17:32:27.7744074Z ##[group]Run node --check server.js
+2025-09-20T17:32:27.7744397Z [36;1mnode --check server.js[0m
+2025-09-20T17:32:27.7774898Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:32:27.7775152Z ##[endgroup]

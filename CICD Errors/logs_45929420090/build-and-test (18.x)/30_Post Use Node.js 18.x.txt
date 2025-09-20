@@ -1,0 +1,4 @@
+﻿2025-09-20T17:33:10.3302455Z Post job cleanup.
+2025-09-20T17:33:10.5077145Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/QA-and-Testing-for-Mirror/QA-and-Testing-for-Mirror --files-from manifest.txt --use-compress-program zstdmt
+2025-09-20T17:33:11.9295836Z Sent 73146295 of 73146295 (100.0%), 69.7 MBs/sec
+2025-09-20T17:33:12.0515019Z Cache saved with the key: node-cache-Linux-npm-bd42ca2bb42da82ab0533556244ceb5e1b06051cd1df7c133feb786626601218

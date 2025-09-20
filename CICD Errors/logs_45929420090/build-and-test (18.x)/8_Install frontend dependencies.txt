@@ -1,0 +1,26 @@
+﻿2025-09-20T17:32:27.8313691Z ##[group]Run npm install
+2025-09-20T17:32:27.8313983Z [36;1mnpm install[0m
+2025-09-20T17:32:27.8343462Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:32:27.8343699Z ##[endgroup]
+2025-09-20T17:32:28.3038725Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:32:28.3039274Z npm warn EBADENGINE   package: 'react-router@7.9.1',
+2025-09-20T17:32:28.3039725Z npm warn EBADENGINE   required: { node: '>=20.0.0' },
+2025-09-20T17:32:28.3040199Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:32:28.3040685Z npm warn EBADENGINE }
+2025-09-20T17:32:28.3044127Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:32:28.3044789Z npm warn EBADENGINE   package: 'react-router-dom@7.9.1',
+2025-09-20T17:32:28.3045288Z npm warn EBADENGINE   required: { node: '>=20.0.0' },
+2025-09-20T17:32:28.3045760Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:32:28.3046136Z npm warn EBADENGINE }
+2025-09-20T17:32:28.3051899Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:32:28.3052349Z npm warn EBADENGINE   package: 'vite@7.1.6',
+2025-09-20T17:32:28.3052802Z npm warn EBADENGINE   required: { node: '^20.19.0 || >=22.12.0' },
+2025-09-20T17:32:28.3053301Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:32:28.3053678Z npm warn EBADENGINE }
+2025-09-20T17:32:31.5822531Z 
+2025-09-20T17:32:31.5823316Z added 212 packages, and audited 213 packages in 4s
+2025-09-20T17:32:31.5823787Z 
+2025-09-20T17:32:31.5825897Z 43 packages are looking for funding
+2025-09-20T17:32:31.5826498Z   run `npm fund` for details
+2025-09-20T17:32:31.5834564Z 
+2025-09-20T17:32:31.5834784Z found 0 vulnerabilities

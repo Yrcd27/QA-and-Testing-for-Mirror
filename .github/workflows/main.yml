@@ -46,6 +46,10 @@ jobs:
     - name: Check backend syntax
       working-directory: ./mirror-backend
       run: node --check server.js
+      
+    - name: Setup environment files
+      run: |
+        cp .github/workflows/.env.ci mirror-backend/.env
     
     # Frontend build steps
     - name: Install frontend dependencies
@@ -95,7 +99,7 @@ jobs:
         echo $! > backend.pid
         sleep 5
       env:
-        MONGODB_URI: mongodb://localhost:27017/mirror
+        MONGO_URI: mongodb://localhost:27017/mirror
         JWT_SECRET: test-jwt-secret
         PORT: 3000
       continue-on-error: true
@@ -114,7 +118,10 @@ jobs:
     # Run Selenium tests
     - name: Run Selenium tests
       working-directory: ./selenium-tests
-      run: npm run test:login
+      run: |
+        # Fix permission issues with the mocha binary
+        chmod +x ./node_modules/.bin/mocha
+        npm run test:login
       continue-on-error: true
       env:
         SELENIUM_REMOTE_URL: ''

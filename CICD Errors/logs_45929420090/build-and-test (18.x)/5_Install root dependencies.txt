@@ -1,0 +1,18 @@
+﻿2025-09-20T17:32:23.1356026Z ##[group]Run npm install
+2025-09-20T17:32:23.1356320Z [36;1mnpm install[0m
+2025-09-20T17:32:23.1643436Z shell: /usr/bin/bash -e {0}
+2025-09-20T17:32:23.1643759Z ##[endgroup]
+2025-09-20T17:32:25.6662088Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:32:25.6662835Z npm warn EBADENGINE   package: 'react-router@7.7.1',
+2025-09-20T17:32:25.6663353Z npm warn EBADENGINE   required: { node: '>=20.0.0' },
+2025-09-20T17:32:25.6663899Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:32:25.6664334Z npm warn EBADENGINE }
+2025-09-20T17:32:25.6664689Z npm warn EBADENGINE Unsupported engine {
+2025-09-20T17:32:25.6665181Z npm warn EBADENGINE   package: 'react-router-dom@7.7.1',
+2025-09-20T17:32:25.6665719Z npm warn EBADENGINE   required: { node: '>=20.0.0' },
+2025-09-20T17:32:25.6666364Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-09-20T17:32:25.6666750Z npm warn EBADENGINE }
+2025-09-20T17:32:25.9421720Z 
+2025-09-20T17:32:25.9422543Z up to date, audited 8 packages in 3s
+2025-09-20T17:32:25.9430039Z 
+2025-09-20T17:32:25.9430371Z found 0 vulnerabilities

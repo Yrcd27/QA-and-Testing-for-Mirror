@@ -1,0 +1,104 @@
+name: Mirror App CI/CD Pipeline - Tests Only
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_type:
+        description: 'Type of tests to run'
+        required: true
+        default: 'unit'
+        type: choice
+        options:
+          - unit
+          - selenium
+          - all
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:4.4
+        ports:
+          - 27017:27017
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+    
+    - name: Setup environment files
+      run: |
+        echo "MONGO_URI=mongodb://localhost:27017/mirror" > mirror-backend/.env
+        echo "JWT_SECRET=test-jwt-secret" >> mirror-backend/.env
+        echo "PORT=3000" >> mirror-backend/.env
+
+    # Install dependencies
+    - name: Install backend dependencies
+      if: inputs.test_type == 'all' || inputs.test_type == 'selenium' || inputs.test_type == 'unit'
+      working-directory: ./mirror-backend
+      run: npm install
+
+    - name: Install frontend dependencies
+      if: inputs.test_type == 'all' || inputs.test_type == 'selenium'
+      working-directory: ./mirror-frontend
+      run: npm install
+
+    - name: Install unit test dependencies
+      if: inputs.test_type == 'all' || inputs.test_type == 'unit'
+      working-directory: ./unit-tests
+      run: npm install
+
+    - name: Install Selenium test dependencies
+      if: inputs.test_type == 'all' || inputs.test_type == 'selenium'
+      working-directory: ./selenium-tests
+      run: npm install
+
+    # Start services for tests
+    - name: Start backend server
+      if: inputs.test_type == 'all' || inputs.test_type == 'selenium'
+      working-directory: ./mirror-backend
+      run: |
+        nohup node server.js &
+        echo $! > backend.pid
+        sleep 5
+
+    - name: Start frontend server
+      if: inputs.test_type == 'all' || inputs.test_type == 'selenium'
+      working-directory: ./mirror-frontend
+      run: |
+        nohup npm run dev &
+        echo $! > frontend.pid
+        sleep 10
+
+    # Run tests
+    - name: Run unit tests
+      if: inputs.test_type == 'all' || inputs.test_type == 'unit'
+      working-directory: ./unit-tests
+      run: npm test
+      continue-on-error: true
+      env:
+        API_BASE_URL: http://localhost:3000
+
+    # Setup Chrome for Selenium tests
+    - name: Set up Chrome
+      if: inputs.test_type == 'all' || inputs.test_type == 'selenium'
+      uses: browser-actions/setup-chrome@v1
+      with:
+        chrome-version: stable
+
+    - name: Run Selenium tests
+      if: inputs.test_type == 'all' || inputs.test_type == 'selenium'
+      working-directory: ./selenium-tests
+      run: |
+        chmod +x ./node_modules/.bin/mocha
+        npm run test:login
+      continue-on-error: true
+      env:
+        SELENIUM_BROWSER: chrome
+        SELENIUM_HEADLESS: 'true'
+        BASE_URL: http://localhost:5173
+        API_URL: http://localhost:3000
