@@ -1,0 +1,78 @@
+# JMeter Load Testing for Mirror Login API - Quick Guide
+
+## Required Software
+- Java Runtime Environment (JRE) 8+ (verify with: java -version)
+- JMeter 5.6.3+ installed
+
+## Setup Steps
+1. Make sure your backend server is running:
+   ```
+   cd mirror-backend
+   npm start
+   ```
+
+2. Register test users (one-time setup):
+   ```
+   cd jmeter-tests
+   .\register-test-users.ps1
+   ```
+
+## Running the Load Test
+1. Run the test:
+   ```
+   cd jmeter-tests
+   .\run-load-test.bat
+   ```
+
+## Viewing Test Results
+1. After the test completes, an HTML dashboard will automatically open in your browser
+2. If not, manually open: `jmeter-tests\results\dashboard-[timestamp]\index.html`
+3. CSV results are saved in: `jmeter-tests\results\results-[timestamp].csv`
+
+## Key Metrics to Look For
+1. Response Times:
+   - Average response time (aim for < 500ms)
+   - 90th percentile (aim for < 800ms)
+   - 95th percentile (aim for < 1000ms)
+   - Maximum response time
+
+2. Throughput:
+   - Requests per second
+   - Total successful requests
+
+3. Error Rate:
+   - Should be close to 0%
+   - Any errors indicate potential issues
+
+## Analyzing Common Bottlenecks
+1. High Response Times:
+   - Database queries may need optimization
+   - Add indexes to frequently queried fields (e.g., email in User collection)
+   - Check bcrypt work factor (security vs. performance balance)
+
+2. Low Throughput:
+   - Check CPU usage during test
+   - MongoDB connection pool may need adjustment
+   - Consider Node.js clustering for multi-core utilization
+
+3. High Error Rates:
+   - Check for database connection failures
+   - Server memory constraints
+   - Concurrent connection limits
+
+## Adjusting Test Parameters
+1. To increase user load, edit the JMX file in JMeter GUI:
+   - Open JMeter GUI
+   - Load `scripts\login-api-load-test.jmx`
+   - Find "Thread Group" > Edit "Number of Threads"
+   - Save and run test again
+
+2. To test different endpoints:
+   - Create new JMX files using JMeter GUI
+   - Follow similar pattern to login-api-load-test.jmx
+
+## Interpreting Dashboard Sections
+1. Statistics Dashboard: Overview of all metrics
+2. Response Times Over Time: Shows performance stability
+3. Response Time Distribution: Shows response time patterns
+4. Throughput: Shows requests per minute/second
