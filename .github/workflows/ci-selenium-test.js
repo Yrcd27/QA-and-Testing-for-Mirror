@@ -1,6 +1,6 @@
 /**
  * Simple Selenium test for CI/CD pipeline
- * This is a simplified version that works with our basic HTML test page
+ * This is a simplified version that works with our basic HTML test page...
  */
 
 const { Builder, By, until } = require('selenium-webdriver');
