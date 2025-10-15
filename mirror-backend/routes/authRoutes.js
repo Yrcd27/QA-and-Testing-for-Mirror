@@ -15,10 +15,22 @@ router.post("/signup", async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    // Check password length
-    if (password.length < 6) {
+    // Stronger password requirements
+    if (password.length < 8) {
       return res.status(400).json({
-        message: "Password must be at least 6 characters long"
+        message: "Password must be at least 8 characters long"
+      });
+    }
+    
+    // Check for password complexity
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumbers = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    
+    if (!(hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChar)) {
+      return res.status(400).json({
+        message: "Password must contain uppercase, lowercase, number, and special character"
       });
     }
 
@@ -28,8 +40,8 @@ router.post("/signup", async (req, res) => {
       return res.status(400).json({ message: "Email already exists" });
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Hash password with increased cost factor for stronger security
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     // Create new user
     const newUser = new User({ Name, email, password: hashedPassword });

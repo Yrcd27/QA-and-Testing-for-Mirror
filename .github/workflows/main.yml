@@ -60,12 +60,7 @@ jobs:
       run: npm run build
       continue-on-error: true
     
-    # Skipping lint as it might fail due to environment differences
-    # - name: Run frontend lint
-    #   working-directory: ./mirror-frontend
-    #   run: npm run lint
-    
-    # Start Backend server for all tests
+   
     - name: Start backend server
       working-directory: ./mirror-backend
       run: |
