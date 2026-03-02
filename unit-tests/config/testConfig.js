@@ -8,13 +8,13 @@ const timestamp = new Date().getTime();
 const newUser = {
   Name: `TestUser_${timestamp}`,
   email: `testuser_${timestamp}@example.com`,
-  password: "securePassword123"
+  password: "SecurePassword123!"
 };
 
 const anotherUser = {
   Name: `AnotherUser_${timestamp}`,
   email: `anotheruser_${timestamp}@example.com`,
-  password: "anotherPassword456"
+  password: "AnotherPassword456@"
 };
 
 module.exports = {

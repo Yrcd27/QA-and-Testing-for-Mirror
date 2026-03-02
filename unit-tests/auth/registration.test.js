@@ -69,7 +69,7 @@ describe('User Registration Tests', () => {
     
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty('message');
-    expect(response.body.message).toBe('Password must be at least 6 characters long');
+    expect(response.body.message).toBe('Password must be at least 8 characters long');
   });
 
   // Test for registration with existing email
