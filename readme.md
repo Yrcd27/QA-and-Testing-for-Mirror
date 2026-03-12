@@ -1,3 +1,21 @@
+<div align="center">
+
+# TaskBoard - The Task Manager
+
+A full-stack task management application with JWT authentication, role-based access control, and comprehensive task management features.
+
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.0-6DB33F?style=flat&logo=spring-boot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Next.js](https://img.shields.io/badge/Next.js-14-000000?style=flat&logo=next.js&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react&logoColor=black)](https://reactjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=flat&logo=mysql&logoColor=white)](https://www.mysql.com)
+[![Java](https://img.shields.io/badge/Java-17-007396?style=flat&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+[![JWT](https://img.shields.io/badge/JWT-Authentication-000000?style=flat&logo=json-web-tokens&logoColor=white)](https://jwt.io)
+
+</div>
+
+---
+
 # QA & Testing — Mirror Journaling App
 
 > **Application repo:** [github.com/Yrcd27/Mirror](https://github.com/Yrcd27/Mirror)
@@ -163,7 +181,7 @@ A structured security review was conducted using the OWASP Top 10 (2021) as the 
 | Password hashing | bcrypt cost factor default | Cost factor 12 |
 | JWT expiry | No enforcement | 1-hour expiry |
 | Brute force protection | None | Rate limiter: 10 attempts / 15 min on auth routes |
-| Error messages | Different messages for "user not found" vs "wrong password" | Unified: `"Invalid email or password"` (prevents user enumeration) |
+| Error messages | Different messages for "user not found" vs "wrong password" | Unified: "Invalid email or password" (prevents user enumeration) |
 
 ### Vulnerability 2 — A01: Broken Access Control
 
@@ -247,7 +265,7 @@ The MongoDB connection, JWT secret, and port are all injected via environment va
 │   └── fixes/                      # patched source files
 │
 └── .github/workflows/              # CI/CD pipeline definitions
-```
+``` 
 
 ---
 
