@@ -1,5 +1,3 @@
----
-
 # QA & Testing — Mirror Journaling App
 
 > **Application repo:** [github.com/Yrcd27/Mirror](https://github.com/Yrcd27/Mirror)
