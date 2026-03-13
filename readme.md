@@ -1,4 +1,20 @@
+<div align="center">
+
 # QA & Testing — Mirror Journaling App
+
+A complete software quality assurance project covering the full testing pyramid — unit tests, API testing, end-to-end browser automation, load testing, security analysis, and CI/CD pipeline automation.
+
+[![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=flat&logo=node.js&logoColor=white)](https://nodejs.org)
+[![Jest](https://img.shields.io/badge/Jest-29.x-C21325?style=flat&logo=jest&logoColor=white)](https://jestjs.io)
+[![Supertest](https://img.shields.io/badge/Supertest-6.x-000000?style=flat&logo=supertest&logoColor=white)](https://github.com/ladjs/supertest)
+[![Selenium](https://img.shields.io/badge/Selenium-WebDriver%204.x-43B02A?style=flat&logo=selenium&logoColor=white)](https://www.selenium.dev)
+[![Postman](https://img.shields.io/badge/Postman-Collections-FF6C37?style=flat&logo=postman&logoColor=white)](https://www.postman.com)
+[![Newman](https://img.shields.io/badge/Newman-CLI%20Runner-FF6C37?style=flat&logo=postman&logoColor=white)](https://www.npmjs.com/package/newman)
+[![Apache JMeter](https://img.shields.io/badge/Apache%20JMeter-5.6.3+-D22128?style=flat&logo=apache&logoColor=white)](https://jmeter.apache.org)
+[![OWASP](https://img.shields.io/badge/OWASP-Top%2010%20(2021)-000000?style=flat&logo=owasp&logoColor=white)](https://owasp.org/www-project-top-ten/)
+[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?style=flat&logo=github-actions&logoColor=white)](https://github.com/features/actions)
+
+</div>
 
 > **Application repo:** [github.com/Yrcd27/Mirror](https://github.com/Yrcd27/Mirror)
 
@@ -254,7 +270,7 @@ The MongoDB connection, JWT secret, and port are all injected via environment va
 ## Tools & Versions
 
 | Tool | Version | Purpose |
-|:---|:---:|:---|
+|:---|:---|:---|
 | Jest | 29.x | Unit test framework |
 | Supertest | 6.x | HTTP API assertions |
 | Selenium WebDriver | 4.x | Browser automation |
